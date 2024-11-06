@@ -1,36 +1,12 @@
 import "./styles.css";
-import * as homePage from "./homePage.js";
-import * as menuPage from "./menu.js";
-import * as aboutPage from "./about.js";
+import { compareAsc, format } from "date-fns";
+import * as projectModule from "./project";
+import * as priorityModule from "./priority";
 
-const content = document.querySelector(".content");
-const homeButton = document.querySelector(".homeButton");
-const menuButton = document.querySelector(".menuButton");
-const aboutButton = document.querySelector(".aboutButton");
+const testingProject = new projectModule.Project("Do testing stuff");
 
-homeButton.addEventListener("click", loadHomePage);
-menuButton.addEventListener("click", loadMenuPage);
-aboutButton.addEventListener("click", loadAboutPage);
+const firstTodoList = testingProject.addNewTodoList("First todo list", "This is the first list of todos", format(new Date(2025, 5, 17), "yyyy-MM-dd"));
+firstTodoList.addNewTodo("Clean your shit", "You have to clean your shit or you will die from smell", format(new Date(2025, 5, 10), "yyyy-MM-dd"));
 
 
-function loadHomePage() {
-    clearContent();
-    homePage.loadPage();
-}
-
-function loadMenuPage() {
-    clearContent();
-    menuPage.loadPage();
-}
-
-function loadAboutPage() {
-    clearContent();
-    aboutPage.loadPage();
-}
-
-function clearContent() {
-    content.replaceChildren();
-}
-
-loadMenuPage();
-
+console.log(firstTodoList);
