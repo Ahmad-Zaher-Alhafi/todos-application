@@ -1,0 +1,39 @@
+.content {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+    height: 100vh;
+    width: 100vw;
+}
+
+.restaurantImg {
+    height: 50vh;
+    width: 50vw;
+}
+
+.menuContent {
+    --minMealImgSize: 100px;
+    --maxMealImgSize: 1fr;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template: repeat(1, minmax(var(--minMealImgSize), var(--maxMealImgSize))) / repeat(auto-fit, minmax(var(--minMealImgSize), var(--maxMealImgSize)));
+    
+    gap: 20px;
+}
+
+.meal {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    background-color: gray;
+}
+
+.mealImg {
+    width: 100%;
+    height: auto;
+}
