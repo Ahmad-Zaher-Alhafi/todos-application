@@ -4,8 +4,9 @@ import * as priorityModule from "./priority";
 class Project {
     #todoLists;
 
-    constructor(title, todoLists = []) {
+    constructor(id, title, todoLists = []) {
         this.title = title;
+        this.id = id;
         this.#todoLists = todoLists;
     }
 
