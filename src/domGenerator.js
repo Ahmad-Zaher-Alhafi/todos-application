@@ -3,7 +3,17 @@ const projects = document.querySelector(".projects");
 const projectPrefab = document.querySelector(".project");
 projectPrefab.remove();
 
+const textConfigurationPrefab = document.querySelector(".projectConfiguration");
+textConfigurationPrefab.remove();
+
 const projectElements = [];
+
+function createTextConfigurationElement(labelText) {
+    const textConfiguration = textConfigurationPrefab.cloneNode(true);
+    const configurationLabel = textConfiguration.querySelector(".projectTitle");
+    configurationLabel.textContent = labelText;
+    return textConfiguration;
+}
 
 function createProjectElement(id, title) {
     const project = projectPrefab.cloneNode(true);
@@ -25,4 +35,4 @@ function removeProjectElemnt(id) {
     projectToRemove.remove();
 }
 
-export { createProjectElement, removeProjectElemnt };
+export { createProjectElement, removeProjectElemnt, createTextConfigurationElement };

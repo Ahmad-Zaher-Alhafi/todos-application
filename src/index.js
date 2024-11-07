@@ -10,9 +10,6 @@ let projectID = 0;
 const addProjectButton = document.querySelector(".addProjectButton");
 addProjectButton.addEventListener("click", addProjectClicked);
 
-const projectConfiguration = document.querySelector(".projectConfiguration");
-projectConfiguration.remove();
-
 const addProjectSection = document.querySelector(".addProjectSection");
 
 
