@@ -4,7 +4,8 @@ import * as todoModule from "./todo";
 class TodoList {
     #todos;
 
-    constructor(title, description, dueDate, priority, todos = []) {
+    constructor(id, title, description, dueDate, priority, todos = []) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
