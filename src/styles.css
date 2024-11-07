@@ -1,0 +1,276 @@
+body {
+    margin: 0;
+    color: white;
+}
+
+.content {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+}
+
+.sideBar {
+    padding: 20px;
+    background-color: rgb(83, 83, 83);
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+}
+
+.displayArea {
+    padding: 20px;
+    background-color: rgb(41, 41, 41);
+    flex: 3;
+}
+
+.projects {
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    gap: 30px;
+
+    width: 100%;
+}
+
+.project {
+    padding: 20px;
+    border-style: solid;
+    border-radius: 25px;
+    width: 86%;
+}
+
+.projectsHeaderText {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.projectHeader {
+    display: flex;
+    gap: 10px;
+}
+
+.projectTitle {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.addProjectSection {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-self: flex-start;
+}
+
+.addProjectHeader {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.addProjectButton {
+    font-size: 50px;
+}
+
+.textConfiguration {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* To do section */
+
+.todoLists {
+    padding-left: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.todoListsContent {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.addTodoListSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-self: flex-start;
+}
+
+.addTodoListHeader {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    font-size: large;
+    font-weight: bold;
+}
+
+.addTodoListButton {
+    font-size: 25px;
+}
+
+.todoList {
+    display: flex;
+    gap: 10px;
+}
+
+.todoListTitle {
+    font-size: large;
+    font-weight: bol;
+}
+
+.todoListDisplay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.todoListDisplayHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.todoListDisplayContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.todoListDisplay .todoListTitle {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.todoListHeader {
+    display: flex;
+    gap: 10px;
+}
+
+.todoListHeader .icon{
+    font-size: 20px;
+}
+
+
+.todoListDisplay .todoListDesc {
+    font-size: 30px;
+}
+
+.todos {
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    gap: 80px;
+    width: 100%;
+}
+
+.category {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    gap: 20px;
+}
+
+.categoryTitle {
+    border-bottom-style: solid;
+    border-width: 2px;
+    padding-bottom: 10px;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.categoryTodos {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    gap: 20px;
+}
+
+.todo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 10px;
+}
+
+.todoHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.todoContent {
+    padding-left: 40px;
+}
+
+.todoTitle {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.todoPriority,
+.todoDueDate {
+    border-style: solid;
+    border-radius: 90px;
+    padding: 5px 10px;
+    border-width: 2px;
+    font-size: small;
+}
+
+.icon {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+button:not(.icon) {
+    background-color: rgb(83, 83, 83);
+    color: white;
+    border-radius: 25px;
+    padding: 5px 20px;
+    border-color: white;
+
+    border-width: 2px;
+    border-style: solid;
+
+    font-weight: bold;
+
+    box-shadow: 2px 4px 2px rgb(41, 41, 41);
+}
+
+input {
+    border-radius: 25px;
+    padding: 5px 10px;
+    outline: none;
+    border-style: solid;
+    border-color: white;
+    background-color: rgb(83, 83, 83);
+    color: white;
+}
+
+input::placeholder {
+    color: white;
+    opacity: .5;
+    font-style: italic;
+}

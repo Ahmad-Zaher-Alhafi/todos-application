@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Do it all!</title>
 </head>
 
@@ -13,7 +14,203 @@
 
 <body>
     <div class="content">
+        <div class="sideBar">
+            <div class="projectsHeaderText">Projects</div>
+            <div class="projects">
+                <div class="project">
+                    <div class="projectHeader">
+                        <div class="projectTitle">Project 1 asdas</div>
+                        <button class="editProjectButton icon"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="deleteProjectButton icon"><i class="fa-solid fa-trash"></i></button>
+                    </div>
 
+                    <div class="textConfiguration">
+                        <label for="todoListTitle">New project title:</label>
+                        <input type="text" id="todoListTitle" placeholder="Title here...">
+                        <button>Confirm</button>
+                    </div>
+
+                    <div class="todoLists">
+                        <div class="todoListsContent">
+                            <div class="todoList">
+                                <div class="todoListTitle">List title</div>
+                                <button class="editTodoListButton icon"><i
+                                        class="fa-solid fa-pen-to-square"></i></button>
+                                <button class="deleteTodoListButton icon"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="addTodoListSection">
+                            <div class="addTodoListHeader">
+                                <div>Add more todo lists</div>
+                                <button class="addTodoListButton icon"><i
+                                        class="fa-sharp fa-regular fa-square-plus"></i></button>
+                            </div>
+
+                            <div class="textConfiguration">
+                                <label for="todoListTitle">Todo list title:</label>
+                                <input type="text" id="todoListTitle" placeholder="Title here...">
+                                <button>Confirm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="addProjectSection">
+                <div class="addProjectHeader">
+                    <div>Add more projects</div>
+                    <button class="addProjectButton icon"><i class="fa-sharp fa-regular fa-square-plus"></i></button>
+                </div>
+
+                <div class="textConfiguration">
+                    <label for="projectTitle">Project title:</label>
+                    <input type="text" id="projectTitle" placeholder="Title here...">
+                    <button>Confirm</button>
+                </div>
+            </div>
+        </div>
+        <div class="displayArea">
+            <div class="todoListDisplay">
+                <div class="todoListDisplayHeader">
+                    <div class="todoListHeader">
+                        <div class="todoListTitle">List title</div>
+                        <button class="editTodoListButton icon"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="deleteTodoListButton icon"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+
+                    <div class="textConfiguration">
+                        <label for="todoListTitle">New todo list title:</label>
+                        <input type="text" id="todoListTitle" placeholder="Title here...">
+                        <button>Confirm</button>
+                    </div>
+
+                    <div class="todoListDesc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. At porro
+                        repellendus
+                        repudiandae, tempora corporis laudantium dolor voluptatibus non laborum in vero incidunt
+                        voluptatem
+                        voluptates blanditiis similique quam ducimus harum cupiditate?
+                        lor
+                    </div>
+                </div>
+                <div class="todoListDisplayContent">
+                    <div class="todos">
+                        <div class="category">
+                            <div class="categoryTitle">Category 1</div>
+                            <div class="categoryTodos">
+                                <div class="todo">
+                                    <div class="todoHeader">
+                                        <input type="checkbox" class="todoCheck">
+                                        <div class="todoTitle">To do title</div>
+                                        <div class="todoPriority">Priority</div>
+                                        <div class="todoDueDate">Due date</div>
+                                    </div>
+                                    <div class="todoContent">
+                                        <div class="todoDesc">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit earum
+                                            sapiente
+                                            assumenda est, labore esse laborum? Labore odio blanditiis exercitationem.
+                                            Magni
+                                            assumenda harum tempore expedita quod molestiae autem aliquid voluptatibus?
+                                            lor
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="todo">
+                                    <div class="todoHeader">
+                                        <input type="checkbox">
+                                        <div class="todoTitle">To do title</div>
+                                        <div class="todoPriority">Priority</div>
+                                        <div class="todoDueDate">Due date</div>
+                                    </div>
+                                    <div class="todoContent">
+                                        <div class="todoDesc">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit earum
+                                            sapiente
+                                            assumenda est, labore esse laborum? Labore odio blanditiis exercitationem.
+                                            Magni
+                                            assumenda harum tempore expedita quod molestiae autem aliquid voluptatibus?
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="todo">
+                                    <div class="todoHeader">
+                                        <input type="checkbox">
+                                        <div class="todoTitle">To do title</div>
+                                        <div class="todoPriority">Priority</div>
+                                        <div class="todoDueDate">Due date</div>
+                                    </div>
+                                    <div class="todoContent">
+                                        <div class="todoDesc">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit earum
+                                            sapiente
+                                            assumenda est, labore esse laborum? Labore odio blanditiis exercitationem.
+                                            Magni
+                                            assumenda harum tempore expedita quod molestiae autem aliquid voluptatibus?
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category">
+                            <div class="categoryTitle">Category 1</div>
+                            <div class="categoryTodos">
+                                <div class="todo">
+                                    <div class="todoHeader">
+                                        <input type="checkbox" class="todoCheck">
+                                        <div class="todoTitle">To do title</div>
+                                        <div class="todoPriority">Priority</div>
+                                        <div class="todoDueDate">Due date</div>
+                                    </div>
+                                    <div class="todoContent">
+                                        <div class="todoDesc">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit earum
+                                            sapiente
+                                            assumenda est, labore esse laborum? Labore odio blanditiis exercitationem.
+                                            Magni
+                                            assumenda harum tempore expedita quod molestiae autem aliquid voluptatibus?
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="todo">
+                                    <div class="todoHeader">
+                                        <input type="checkbox">
+                                        <div class="todoTitle">To do title</div>
+                                        <div class="todoPriority">Priority</div>
+                                        <div class="todoDueDate">Due date</div>
+                                    </div>
+                                    <div class="todoContent">
+                                        <div class="todoDesc">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit earum
+                                            sapiente
+                                            assumenda est, labore esse laborum? Labore odio blanditiis exercitationem.
+                                            Magni
+                                            assumenda harum tempore expedita quod molestiae autem aliquid voluptatibus?
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="todo">
+                                    <div class="todoHeader">
+                                        <input type="checkbox">
+                                        <div class="todoTitle">To do title</div>
+                                        <div class="todoPriority">Priority</div>
+                                        <div class="todoDueDate">Due date</div>
+                                    </div>
+                                    <div class="todoContent">
+                                        <div class="todoDesc">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit earum
+                                            sapiente
+                                            assumenda est, labore esse laborum? Labore odio blanditiis exercitationem.
+                                            Magni
+                                            assumenda harum tempore expedita quod molestiae autem aliquid voluptatibus?
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 
