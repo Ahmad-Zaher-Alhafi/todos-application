@@ -20,11 +20,14 @@ function generateProjectID() {
     return ++projectID;
 }
 
+function getProject(projectID) {
+    return projects.find(project => project.id === projectID);
+}
+
 function addProjectClicked() {
-    const projectConfiguration = domGeneratorModule.createTextConfigurationElement("Project Title:");
-    addProjectSection.appendChild(projectConfiguration);
-    const addProjectConfirmButton = document.querySelector(".addProjectConfirmButton");
-    addProjectConfirmButton.addEventListener("click", addProjectConfirmed)
+    addProjectSection.appendChild(domGeneratorModule.projectConfigurationElemnt);
+    const configurationConfirmButton = document.querySelector(".configurationConfirmButton");
+    configurationConfirmButton.addEventListener("click", addProjectConfirmed)
 }
 
 function addProjectConfirmed(event) {
@@ -39,9 +42,13 @@ function addProjectConfirmed(event) {
 document.addEventListener("deleteProjectClicked", deleteProjectClicked);
 
 function deleteProjectClicked(event) {
-    const projectID = event.projectID;
-    projects.find(project => project.id === projectID)
-    domGeneratorModule.removeProjectElemnt(event.projectID);
+    const projectID = event.detail.projectID;
+    const project = getProject(projectID);
+    projects.splice(projects.indexOf(project), 1);
+    domGeneratorModule.removeProjectElemnt(projectID);
+
+    console.log(projects);
+}
 
     console.log(projects);
 }
