@@ -21,6 +21,7 @@ function generateProjectID() {
 }
 
 function addProjectClicked() {
+    const projectConfiguration = domGeneratorModule.createTextConfigurationElement("Project Title:");
     addProjectSection.appendChild(projectConfiguration);
     const addProjectConfirmButton = document.querySelector(".addProjectConfirmButton");
     addProjectConfirmButton.addEventListener("click", addProjectConfirmed)
