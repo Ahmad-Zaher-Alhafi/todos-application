@@ -130,17 +130,37 @@ function deleteTodoListClicked(event) {
 document.addEventListener("editTodoListClicked", editTodoListClicked);
 
 function editTodoListClicked(event) {
-    const edittodoListConfigurationElemnt = domGeneratorModule.edittodoListConfigurationElemnt;
-    edittodoListConfigurationElemnt.remove();
+    const editTodoListConfigurationElemnt = domGeneratorModule.edittodoListConfigurationElemnt;
+    editTodoListConfigurationElemnt.remove();
     const todoListID = event.detail.todoListID;
+    const projectID = event.detail.projectID;
     const todoList = domGeneratorModule.getTodoList(todoListID);
-    todoList.appendChild(edittodoListConfigurationElemnt);
+    todoList.appendChild(editTodoListConfigurationElemnt);
 
-    // const configurationConfirmButton = edittodoListConfigurationElemnt.querySelector(".configurationConfirmButton");
-    // configurationConfirmButton.addEventListener("click", (event) => {
-    //     const customEvent = new CustomEvent("editProjectConfirmed", {
-    //         detail: { target: event.target, projectID }
-    //     });
-    //     document.dispatchEvent(customEvent);
-    // })
+    let configurationConfirmButton = editTodoListConfigurationElemnt.querySelector(".configurationConfirmButton");
+    editTodoListConfigurationElemnt.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
+    configurationConfirmButton = editTodoListConfigurationElemnt.querySelector(".configurationConfirmButton");
+    configurationConfirmButton.addEventListener("click", (event) => createEditTodoListConfirmedEvent(event, projectID, todoListID));
+}
+
+function createEditTodoListConfirmedEvent(event, projectID, todoListID) {
+    const customEvent = new CustomEvent("editTodoListConfirmed", {
+        detail: { target: event.target, projectID, todoListID }
+    });
+
+    document.dispatchEvent(customEvent);
+}
+
+document.addEventListener("editTodoListConfirmed", editTodoListConfirmed);
+
+function editTodoListConfirmed(event) {
+    const configurationTitleInput = event.detail.target.parentElement.querySelector(".configurationTitleInput");
+    const todoListTitle = configurationTitleInput.value;
+    const project = getProject(event.detail.projectID);
+    const todoListID = event.detail.todoListID;
+    const todoList = project.getTodoList(todoListID);
+    todoList.setTitle(todoListTitle);
+    domGeneratorModule.setTodoListTitle(todoListID, todoListTitle);
+
+    console.log(projects);
 }

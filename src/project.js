@@ -29,6 +29,10 @@ class Project {
     setTitle(title) {
         this.title = title;
     }
+
+    getTodoList(id){
+        return this.#todoLists.find(todoList => todoList.id === id);
+    }
 }
 
 export { Project };

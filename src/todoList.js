@@ -27,10 +27,9 @@ class TodoList {
         this.#todos.find(todo => todo.title === title)?.pop();
     }
 
-    // setTitle();
-    // setDescriptoin();
-    // setDueDate();
-    // setPriority();
+    setTitle(title) {
+        this.title = title;
+    }
 }
 
 export { TodoList };

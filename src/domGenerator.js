@@ -64,6 +64,11 @@ function setProjectTitle(id, title) {
     project.querySelector(".projectTitle").textContent = title;
 }
 
+function setTodoListTitle(id, title) {
+    const project = getTodoList(id);
+    project.querySelector(".todoListTitle").textContent = title;
+}
+
 function getProject(projectID) {
     return projectElements.find(project => project.getAttribute("projectID") === projectID.toString());
 }
@@ -115,4 +120,4 @@ const editProjectConfigurationElemnt = createTextConfigurationElement("Project n
 const todoListConfigurationElemnt = createTextConfigurationElement("TodoList title:");
 const edittodoListConfigurationElemnt = createTextConfigurationElement("TodoList new title:");
 
-export { createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, edittodoListConfigurationElemnt };
+export { createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, setTodoListTitle, projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, edittodoListConfigurationElemnt };
