@@ -122,3 +122,21 @@ function deleteTodoListClicked(event) {
 
     console.log(projects);
 }
+
+document.addEventListener("editTodoListClicked", editTodoListClicked);
+
+function editTodoListClicked(event) {
+    const edittodoListConfigurationElemnt = domGeneratorModule.edittodoListConfigurationElemnt;
+    edittodoListConfigurationElemnt.remove();
+    const todoListID = event.detail.todoListID;
+    const todoList = domGeneratorModule.getTodoList(todoListID);
+    todoList.appendChild(edittodoListConfigurationElemnt);
+
+    // const configurationConfirmButton = edittodoListConfigurationElemnt.querySelector(".configurationConfirmButton");
+    // configurationConfirmButton.addEventListener("click", (event) => {
+    //     const customEvent = new CustomEvent("editProjectConfirmed", {
+    //         detail: { target: event.target, projectID }
+    //     });
+    //     document.dispatchEvent(customEvent);
+    // })
+}

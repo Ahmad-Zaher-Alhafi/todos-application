@@ -88,6 +88,14 @@ function createTodoListElement(id, projectID, title) {
         });
         document.dispatchEvent(event);
     });
+
+    const editTodoListButton = todoList.querySelector(".editTodoListButton");
+    editTodoListButton.addEventListener("click", () => {
+        const event = new CustomEvent("editTodoListClicked", {
+            detail: { projectID, todoListID }
+        });
+        document.dispatchEvent(event);
+    });
 }
 
 
@@ -105,5 +113,6 @@ function removeTodoListElement(id) {
 const projectConfigurationElemnt = createTextConfigurationElement("Project title:");
 const editProjectConfigurationElemnt = createTextConfigurationElement("Project new title:");
 const todoListConfigurationElemnt = createTextConfigurationElement("TodoList title:");
+const edittodoListConfigurationElemnt = createTextConfigurationElement("TodoList new title:");
 
-export { createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt };
+export { createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, edittodoListConfigurationElemnt };

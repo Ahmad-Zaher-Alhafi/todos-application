@@ -127,6 +127,12 @@ body {
 
 .todoList {
     display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.todoListHeader {
+    display: flex;
     gap: 10px;
 }
 
@@ -165,7 +171,7 @@ body {
     gap: 10px;
 }
 
-.todoListHeader .icon{
+.todoListHeader .icon {
     font-size: 20px;
 }
 
