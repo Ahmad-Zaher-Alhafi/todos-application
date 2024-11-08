@@ -1,35 +1,35 @@
-import * as priorityModule from "./priority";
-import * as todoModule from "./todo";
+import * as categoryModule from "./category";
 
 class TodoList {
-    #todos;
+    #categories;
 
-    constructor(id, projectID, title, description, dueDate, priority, todos = []) {
+    constructor(id, projectID, title, description, dueDate, priority, categories = []) {
         this.id = id;
         this.projectID = projectID;
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.#todos = todos;
+        this.#categories = categories;
     }
 
-    get todos() {
-        return Object.freeze(...this.#todos);
+    get categories() {
+        return Object.freeze(...this.#categories);
     }
 
-    addNewTodo(title, description, dueDate, priority = priorityModule.Priority.Normal) {
-        const todo = new todoModule.Todo(title, description, dueDate, priority);
-        this.#todos.push(todo)
+    addNewCategory(id, title) {
+        const category = new categoryModule.Category(id, title);
+        this.#categories.push(category)
     }
 
-    removeTodoList(title) {
-        this.#todos.find(todo => todo.title === title)?.pop();
+    removeCategory(id) {
+
     }
 
     setTitle(title) {
         this.title = title;
     }
+
 }
 
 export { TodoList };
