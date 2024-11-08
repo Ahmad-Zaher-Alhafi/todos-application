@@ -180,13 +180,35 @@ body {
     font-size: 30px;
 }
 
-.todos {
+.todoCategories {
     padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    gap: 20px;
+    width: 100%;
+}
+
+.categoriesContent {
     display: flex;
     flex-direction: column;
     align-self: flex-start;
     gap: 80px;
     width: 100%;
+}
+
+.addCategorySection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.addCategoryHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .category {
