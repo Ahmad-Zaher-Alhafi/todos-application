@@ -45,8 +45,9 @@ function createProjectElement(id, title) {
     });
 }
 
-function removeProjectElemnt(id) {
+function removeProjectElement(id) {
     const projectToRemove = getProject(id);
+    projectElements.splice(projectElements.indexOf(projectToRemove), 1);
     projectToRemove.remove();
 }
 
@@ -85,11 +86,10 @@ function removeTodoListElement(id) {
     const todoListToRemove = getTodoList(id);
     todoListElements.splice(todoListElements.indexOf(todoListToRemove), 1);
     todoListToRemove.remove();
-    console.log(todoListElements);
 }
 
 
 const projectConfigurationElemnt = createTextConfigurationElement("Project title:");
 const todoListConfigurationElemnt = createTextConfigurationElement("TodoList title:");
 
-export { createProjectElement, removeProjectElemnt, createTodoListElement, getProject, removeTodoListElement, projectConfigurationElemnt, todoListConfigurationElemnt };
+export { createProjectElement, removeProjectElement, createTodoListElement, getProject, removeTodoListElement, projectConfigurationElemnt, todoListConfigurationElemnt };

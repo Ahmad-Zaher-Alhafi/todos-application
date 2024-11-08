@@ -45,7 +45,7 @@ function deleteProjectClicked(event) {
     const projectID = event.detail.projectID;
     const project = getProject(projectID);
     projects.splice(projects.indexOf(project), 1);
-    domGeneratorModule.removeProjectElemnt(projectID);
+    domGeneratorModule.removeProjectElement(projectID);
 
     console.log(projects);
 }
