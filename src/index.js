@@ -61,12 +61,13 @@ function editProjectClicked(event) {
     const todoLists = project.querySelector(".todoLists");
     project.insertBefore(editProjectConfiguration, todoLists);
 
-    const configurationConfirmButton = editProjectConfiguration.querySelector(".configurationConfirmButton");
-    configurationConfirmButton.removeEventListener("click", createEditProjectConfirmedEvent)
-    configurationConfirmButton.addEventListener("click", createEditProjectConfirmedEvent)
+    let configurationConfirmButton = editProjectConfiguration.querySelector(".configurationConfirmButton");
+    editProjectConfiguration.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
+    configurationConfirmButton = editProjectConfiguration.querySelector(".configurationConfirmButton");
+    configurationConfirmButton.addEventListener("click", (event) => createEditProjectConfirmedEvent(event, projectID));
 }
 
-function createEditProjectConfirmedEvent(event) {
+function createEditProjectConfirmedEvent(event, projectID) {
     const customEvent = new CustomEvent("editProjectConfirmed", {
         detail: { target: event.target, projectID }
     });
