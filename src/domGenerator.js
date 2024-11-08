@@ -58,6 +58,8 @@ function createTodoListElement(id, projectID, title) {
     const todoList = todoListPrefab.cloneNode(true);
     todoListElements.push(todoList);
     todoList.setAttribute("todoListID", id);
+    const todoListID = id;
+    projectID = projectID;
     const project = getProject(projectID);
     project.appendChild(todoList);
     const todoListsContent = project.querySelector(".todoListsContent");
@@ -65,14 +67,29 @@ function createTodoListElement(id, projectID, title) {
     const todoListTitle = todoList.querySelector(".todoListTitle");
     todoListTitle.textContent = title;
 
-    // const addTodoListButton = project.querySelector(".addTodoListButton");
-    // addTodoListButton.addEventListener("click", () => {
-    //     const event = new CustomEvent("addTodoListClicked", { projectID });
-    //     document.dispatchEvent(event);
-    // });
+    const deleteTodoListButton = todoList.querySelector(".deleteTodoListButton");
+    deleteTodoListButton.addEventListener("click", () => {
+        const event = new CustomEvent("deleteTodoListClicked", {
+            detail: { projectID, todoListID }
+        });
+        document.dispatchEvent(event);
+    });
 }
+
+
+function getTodoList(todoListID) {
+    return todoListElements.find(todoList => todoList.getAttribute("todoListID") === todoListID.toString());
+}
+
+function removeTodoListElement(id) {
+    const todoListToRemove = getTodoList(id);
+    todoListElements.splice(todoListElements.indexOf(todoListToRemove), 1);
+    todoListToRemove.remove();
+    console.log(todoListElements);
+}
+
 
 const projectConfigurationElemnt = createTextConfigurationElement("Project title:");
 const todoListConfigurationElemnt = createTextConfigurationElement("TodoList title:");
 
-export { createProjectElement, removeProjectElemnt, createTodoListElement, getProject, projectConfigurationElemnt, todoListConfigurationElemnt };
+export { createProjectElement, removeProjectElemnt, createTodoListElement, getProject, removeTodoListElement, projectConfigurationElemnt, todoListConfigurationElemnt };

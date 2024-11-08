@@ -22,8 +22,9 @@ class Project {
         return todoList;
     }
 
-    removeTodoList(title) {
-        this.#todoLists.find(list => list.title === title)?.pop();
+    removeTodoList(id) {
+        const todoList = this.#todoLists.find(list => list.id === id);
+        this.#todoLists.splice(this.#todoLists.indexOf(todoList), 1);
     }
 
     generateTodoListID() {

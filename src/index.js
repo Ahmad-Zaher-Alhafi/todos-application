@@ -74,9 +74,20 @@ function addTodoListConfirmed(event) {
     const todoListTitle = configurationTitleInput.value;
     const project = getProject(event.detail.projectID)
     const todoListID = project.generateTodoListID();
-    const todoList = new todoListModule.TodoList(todoListID, project.id, todoListTitle, "Todo list discreption", format(new Date(1, 5, 2025), "dd-mm-yyyy"), priorityModule.Priority.High);
-    projects.push(todoList);
-    const todoListElement = domGeneratorModule.createTodoListElement(todoList.id, project.id, todoList.title);
+    const todoList = project.addNewTodoList(todoListID, project.id, todoListTitle, "Todo list discreption", format(new Date(1, 5, 2025), "dd-mm-yyyy"), priorityModule.Priority.High);
+    domGeneratorModule.createTodoListElement(todoList.id, project.id, todoList.title);
+
+    console.log(projects);
+}
+
+document.addEventListener("deleteTodoListClicked", deleteTodoListClicked);
+
+function deleteTodoListClicked(event) {
+    const projectID = event.detail.projectID;
+    const todoListID = event.detail.todoListID;
+    const project = getProject(projectID);
+    project.removeTodoList(todoListID);
+    domGeneratorModule.removeTodoListElement(todoListID);
 
     console.log(projects);
 }
