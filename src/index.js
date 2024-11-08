@@ -94,13 +94,14 @@ function addTodoListClicked(event) {
     const projectID = event.detail.projectID;
     const project = domGeneratorModule.getProject(projectID);
     project.querySelector(".addTodoListSection").appendChild(todoListConfiguration);
-    const configurationConfirmButton = todoListConfiguration.querySelector(".configurationConfirmButton");
-    configurationConfirmButton.removeEventListener("click", createAddTodoListConfirmedEvent);
-    configurationConfirmButton.addEventListener("click", createAddTodoListConfirmedEvent);
+    let configurationConfirmButton = todoListConfiguration.querySelector(".configurationConfirmButton");
+    todoListConfiguration.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton); // To get rid of all event listeners on the button
+    configurationConfirmButton = todoListConfiguration.querySelector(".configurationConfirmButton");
+    configurationConfirmButton.addEventListener("click", (event) => createAddTodoListConfirmedEvent(event, projectID));
 }
 
 
-function createAddTodoListConfirmedEvent(event) {
+function createAddTodoListConfirmedEvent(event, projectID) {
     const customEvent = new CustomEvent("addTodoListConfirmed", {
         detail: { target: event.target, projectID }
     });
