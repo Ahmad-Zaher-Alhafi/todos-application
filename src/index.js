@@ -59,6 +59,26 @@ function editProjectClicked(event) {
     const project = domGeneratorModule.getProject(projectID);
     const todoLists = project.querySelector(".todoLists");
     project.insertBefore(editProjectConfiguration, todoLists);
+
+    const configurationConfirmButton = editProjectConfiguration.querySelector(".configurationConfirmButton");
+    configurationConfirmButton.addEventListener("click", (event) => {
+        const customEvent = new CustomEvent("editProjectConfirmed", {
+            detail: { target: event.target, projectID }
+        });
+        document.dispatchEvent(customEvent);
+    })
+}
+
+document.addEventListener("editProjectConfirmed", editProjectConfirmed);
+
+function editProjectConfirmed(event) {
+    const configurationTitleInput = event.detail.target.parentElement.querySelector(".configurationTitleInput");
+    const projectTitle = configurationTitleInput.value;
+    const project = getProject(event.detail.projectID);
+    const todoList = project.setTitle(projectTitle);
+    domGeneratorModule.setProjectTitle(project.id, projectTitle);
+
+    console.log(projects);
 }
 
 document.addEventListener("addTodoListClicked", addTodoListClicked);

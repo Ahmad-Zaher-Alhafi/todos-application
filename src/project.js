@@ -30,6 +30,10 @@ class Project {
     generateTodoListID() {
         return ++this.#todoListID;
     }
+
+    setTitle(title) {
+        this.title = title;
+    }
 }
 
 export { Project };

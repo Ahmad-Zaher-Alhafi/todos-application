@@ -59,6 +59,11 @@ function removeProjectElement(id) {
     projectToRemove.remove();
 }
 
+function setProjectTitle(id, title) {
+    const project = getProject(id);
+    project.querySelector(".projectTitle").textContent = title;
+}
+
 function getProject(projectID) {
     return projectElements.find(project => project.getAttribute("projectID") === projectID.toString());
 }
@@ -101,4 +106,4 @@ const projectConfigurationElemnt = createTextConfigurationElement("Project title
 const editProjectConfigurationElemnt = createTextConfigurationElement("Project new title:");
 const todoListConfigurationElemnt = createTextConfigurationElement("TodoList title:");
 
-export { createProjectElement, removeProjectElement, createTodoListElement, getProject, removeTodoListElement, projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt };
+export { createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt };
