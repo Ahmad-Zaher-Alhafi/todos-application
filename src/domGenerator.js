@@ -36,6 +36,14 @@ function createProjectElement(id, title) {
         document.dispatchEvent(event);
     });
 
+    const editProjectButton = project.querySelector(".editProjectButton");
+    editProjectButton.addEventListener("click", () => {
+        const event = new CustomEvent("editProjectClicked", {
+            detail: { projectID }
+        });
+        document.dispatchEvent(event);
+    });
+
     const addTodoListButton = project.querySelector(".addTodoListButton");
     addTodoListButton.addEventListener("click", () => {
         const event = new CustomEvent("addTodoListClicked", {
@@ -90,6 +98,7 @@ function removeTodoListElement(id) {
 
 
 const projectConfigurationElemnt = createTextConfigurationElement("Project title:");
+const editProjectConfigurationElemnt = createTextConfigurationElement("Project new title:");
 const todoListConfigurationElemnt = createTextConfigurationElement("TodoList title:");
 
-export { createProjectElement, removeProjectElement, createTodoListElement, getProject, removeTodoListElement, projectConfigurationElemnt, todoListConfigurationElemnt };
+export { createProjectElement, removeProjectElement, createTodoListElement, getProject, removeTodoListElement, projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt };

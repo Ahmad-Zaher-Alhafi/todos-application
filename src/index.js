@@ -50,6 +50,17 @@ function deleteProjectClicked(event) {
     console.log(projects);
 }
 
+document.addEventListener("editProjectClicked", editProjectClicked);
+
+function editProjectClicked(event) {
+    const editProjectConfiguration = domGeneratorModule.editProjectConfigurationElemnt;
+    editProjectConfiguration.remove();
+    const projectID = event.detail.projectID;
+    const project = domGeneratorModule.getProject(projectID);
+    const todoLists = project.querySelector(".todoLists");
+    project.insertBefore(editProjectConfiguration, todoLists);
+}
+
 document.addEventListener("addTodoListClicked", addTodoListClicked);
 
 function addTodoListClicked(event) {
