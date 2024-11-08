@@ -4,21 +4,14 @@ import * as projectModule from "./project";
 import * as todoListModule from "./todoList";
 import * as domGeneratorModule from "./domGenerator";
 import * as priorityModule from "./priority";
+import * as idsGeneratorModule from "./idsGenerator";
 
 const projects = [];
-let projectID = 0;
 
 const addProjectButton = document.querySelector(".addProjectButton");
 addProjectButton.addEventListener("click", addProjectClicked);
 
 const addProjectSection = document.querySelector(".addProjectSection");
-
-// const firstTodoList = testingProject.addNewTodoList("First todo list", "This is the first list of todos", format(new Date(2025, 5, 17), "yyyy-MM-dd"));
-// firstTodoList.addNewTodo("Clean your shit", "You have to clean your shit or you will die from smell", format(new Date(2025, 5, 10), "yyyy-MM-dd"));
-
-function generateProjectID() {
-    return ++projectID;
-}
 
 function getProject(projectID) {
     return projects.find(project => project.id === projectID);
@@ -33,7 +26,7 @@ function addProjectClicked() {
 
 function addProjectConfirmed(event) {
     const configurationTitleInput = event.target.parentElement.querySelector(".configurationTitleInput");
-    const project = new projectModule.Project(generateProjectID(), configurationTitleInput.value);
+    const project = new projectModule.Project(idsGeneratorModule.generateProjectID(), configurationTitleInput.value);
     projects.push(project);
     domGeneratorModule.createProjectElement(project.id, project.title);
 
@@ -101,7 +94,6 @@ function addTodoListClicked(event) {
     configurationConfirmButton.addEventListener("click", (event) => createAddTodoListConfirmedEvent(event, projectID));
 }
 
-
 function createAddTodoListConfirmedEvent(event, projectID) {
     const customEvent = new CustomEvent("addTodoListConfirmed", {
         detail: { target: event.target, projectID }
@@ -116,7 +108,7 @@ function addTodoListConfirmed(event) {
     const configurationTitleInput = event.detail.target.parentElement.querySelector(".configurationTitleInput");
     const todoListTitle = configurationTitleInput.value;
     const project = getProject(event.detail.projectID)
-    const todoListID = project.generateTodoListID();
+    const todoListID = idsGeneratorModule.generateTodoListID();
     const todoList = project.addNewTodoList(todoListID, project.id, todoListTitle, "Todo list discreption", format(new Date(1, 5, 2025), "dd-mm-yyyy"), priorityModule.Priority.High);
     domGeneratorModule.createTodoListElement(todoList.id, project.id, todoList.title);
 
