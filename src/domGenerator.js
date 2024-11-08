@@ -1,5 +1,8 @@
 const projects = document.querySelector(".projects");
 
+const todoListPrefab = document.querySelector(".todoList");
+todoListPrefab.remove();
+
 const projectPrefab = document.querySelector(".project");
 projectPrefab.remove();
 
@@ -7,6 +10,7 @@ const textConfigurationPrefab = document.querySelector(".projectConfiguration");
 textConfigurationPrefab.remove();
 
 const projectElements = [];
+const todoListElements = [];
 
 function createTextConfigurationElement(labelText) {
     const textConfiguration = textConfigurationPrefab.cloneNode(true);
@@ -48,6 +52,24 @@ function removeProjectElemnt(id) {
 
 function getProject(projectID) {
     return projectElements.find(project => project.getAttribute("projectID") === projectID.toString());
+}
+
+function createTodoListElement(id, projectID, title) {
+    const todoList = todoListPrefab.cloneNode(true);
+    todoListElements.push(todoList);
+    todoList.setAttribute("todoListID", id);
+    const project = getProject(projectID);
+    project.appendChild(todoList);
+    const todoListsContent = project.querySelector(".todoListsContent");
+    todoListsContent.appendChild(todoList);
+    const todoListTitle = todoList.querySelector(".todoListTitle");
+    todoListTitle.textContent = title;
+
+    // const addTodoListButton = project.querySelector(".addTodoListButton");
+    // addTodoListButton.addEventListener("click", () => {
+    //     const event = new CustomEvent("addTodoListClicked", { projectID });
+    //     document.dispatchEvent(event);
+    // });
 }
 
 const projectConfigurationElemnt = createTextConfigurationElement("Project title:");

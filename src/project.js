@@ -3,6 +3,7 @@ import * as priorityModule from "./priority";
 
 class Project {
     #todoLists;
+    #todoListID = 0;
 
     constructor(id, title, todoLists = []) {
         this.title = title;
@@ -23,6 +24,10 @@ class Project {
 
     removeTodoList(title) {
         this.#todoLists.find(list => list.title === title)?.pop();
+    }
+
+    generateTodoListID() {
+        return ++this.#todoListID;
     }
 }
 
