@@ -27,6 +27,7 @@ function getProject(projectID) {
 function addProjectClicked() {
     addProjectSection.appendChild(domGeneratorModule.projectConfigurationElemnt);
     const configurationConfirmButton = document.querySelector(".configurationConfirmButton");
+    configurationConfirmButton.removeEventListener("click", addProjectConfirmed)
     configurationConfirmButton.addEventListener("click", addProjectConfirmed)
 }
 
@@ -61,12 +62,16 @@ function editProjectClicked(event) {
     project.insertBefore(editProjectConfiguration, todoLists);
 
     const configurationConfirmButton = editProjectConfiguration.querySelector(".configurationConfirmButton");
-    configurationConfirmButton.addEventListener("click", (event) => {
-        const customEvent = new CustomEvent("editProjectConfirmed", {
-            detail: { target: event.target, projectID }
-        });
-        document.dispatchEvent(customEvent);
-    })
+    configurationConfirmButton.removeEventListener("click", createEditProjectConfirmedEvent)
+    configurationConfirmButton.addEventListener("click", createEditProjectConfirmedEvent)
+}
+
+function createEditProjectConfirmedEvent(event) {
+    const customEvent = new CustomEvent("editProjectConfirmed", {
+        detail: { target: event.target, projectID }
+    });
+
+    document.dispatchEvent(customEvent);
 }
 
 document.addEventListener("editProjectConfirmed", editProjectConfirmed);
@@ -90,12 +95,17 @@ function addTodoListClicked(event) {
     const project = domGeneratorModule.getProject(projectID);
     project.querySelector(".addTodoListSection").appendChild(todoListConfiguration);
     const configurationConfirmButton = todoListConfiguration.querySelector(".configurationConfirmButton");
-    configurationConfirmButton.addEventListener("click", (event) => {
-        const customEvent = new CustomEvent("addTodoListConfirmed", {
-            detail: { target: event.target, projectID }
-        });
-        document.dispatchEvent(customEvent);
-    })
+    configurationConfirmButton.removeEventListener("click", createAddTodoListConfirmedEvent);
+    configurationConfirmButton.addEventListener("click", createAddTodoListConfirmedEvent);
+}
+
+
+function createAddTodoListConfirmedEvent(event) {
+    const customEvent = new CustomEvent("addTodoListConfirmed", {
+        detail: { target: event.target, projectID }
+    });
+
+    document.dispatchEvent(customEvent);
 }
 
 document.addEventListener("addTodoListConfirmed", addTodoListConfirmed);
