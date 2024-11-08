@@ -9,6 +9,11 @@ projectPrefab.remove();
 const textConfigurationPrefab = document.querySelector(".projectConfiguration");
 textConfigurationPrefab.remove();
 
+const todoListDisplayPrefab = document.querySelector(".todoListDisplay");
+todoListDisplayPrefab.remove();
+
+const displayArea = document.querySelector(".displayArea");
+
 const projectElements = [];
 const todoListElements = [];
 
@@ -87,19 +92,28 @@ function createTodoListElement(id, projectID, title) {
     todoListTitle.textContent = title;
 
     const deleteTodoListButton = todoList.querySelector(".deleteTodoListButton");
-    deleteTodoListButton.addEventListener("click", () => {
-        const event = new CustomEvent("deleteTodoListClicked", {
+    deleteTodoListButton.addEventListener("click", (event) => {
+        const customEvent = new CustomEvent("deleteTodoListClicked", {
             detail: { projectID, todoListID }
         });
-        document.dispatchEvent(event);
+        event.stopPropagation();
+        document.dispatchEvent(customEvent);
     });
 
     const editTodoListButton = todoList.querySelector(".editTodoListButton");
-    editTodoListButton.addEventListener("click", () => {
-        const event = new CustomEvent("editTodoListClicked", {
+    editTodoListButton.addEventListener("click", (event) => {
+        const customEvent = new CustomEvent("editTodoListClicked", {
             detail: { projectID, todoListID }
         });
-        document.dispatchEvent(event);
+        event.stopPropagation();
+        document.dispatchEvent(customEvent);
+    });
+
+    todoList.addEventListener("click", () => {
+        const customEvent = new CustomEvent("todoListClicked", {
+            detail: { projectID, todoListID }
+        });
+        document.dispatchEvent(customEvent);
     });
 }
 
@@ -114,10 +128,20 @@ function removeTodoListElement(id) {
     todoListToRemove.remove();
 }
 
+function displayTodoList(title, descreption, categories) {
+    displayArea.appendChild(todoListDisplayPrefab);
+    todoListDisplayPrefab.querySelector(".todoListTitle").textContent = title;
+    todoListDisplayPrefab.querySelector(".todoListDesc").textContent = descreption;
+
+}
+
 
 const projectConfigurationElemnt = createTextConfigurationElement("Project title:");
 const editProjectConfigurationElemnt = createTextConfigurationElement("Project new title:");
 const todoListConfigurationElemnt = createTextConfigurationElement("TodoList title:");
 const edittodoListConfigurationElemnt = createTextConfigurationElement("TodoList new title:");
 
-export { createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, setTodoListTitle, projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, edittodoListConfigurationElemnt };
+export {
+    createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, setTodoListTitle, displayTodoList,
+    projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, edittodoListConfigurationElemnt
+};

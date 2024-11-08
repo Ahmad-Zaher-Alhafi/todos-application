@@ -164,3 +164,15 @@ function editTodoListConfirmed(event) {
 
     console.log(projects);
 }
+
+document.addEventListener("todoListClicked", todoListClicked);
+
+function todoListClicked(event) {
+    const projectId = event.detail.projectID;
+    const todoListID = event.detail.todoListID;
+
+    const project = getProject(projectId);
+    const todoList = project.getTodoList(todoListID);
+
+    domGeneratorModule.displayTodoList(todoList.title, todoList.description);
+}
