@@ -39,21 +39,21 @@ function removeProject(project) {
 }
 
 function storeTodoList(todoList) {
-    if (todoLits.includes(todoList)) return;
+    if (todoLits.some(t => t.id === todoList.id)) return;
 
     todoLits.push(todoList);
     localStorage.setItem(todoListsKey, JSON.stringify(todoLits));
 }
 
 function storeCategory(category) {
-    if (categories.includes(category)) return;
+    if (categories.some(c => c.id === category.id)) return;
 
     categories.push(category);
     localStorage.setItem(categoriesKey, JSON.stringify(categories));
 }
 
 function storeTodo(todo) {
-    if (todos.includes(todo)) return;
+    if (todos.some(t => t.id === todo.id)) return;
 
     todos.push(todo);
     localStorage.setItem(todosKey, JSON.stringify(todos));
