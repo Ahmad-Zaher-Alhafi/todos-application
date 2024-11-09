@@ -1,22 +1,32 @@
-let projectID = 0;
-let todoListID = 0;
-let todoId = 0;
-let categoryId = 0;
+import * as storageManagerModule from "./storageManager";
+
+let projectID = storageManagerModule.lastGeneratedProjectID;
+let todoListID = storageManagerModule.lastGeneratedTodoListID;
+let todoId = storageManagerModule.lastGeneratedCategoryID;
+let categoryId = storageManagerModule.lastGeneratedTodoID;
 
 function generateProjectID() {
-    return ++projectID;
+    projectID += 1
+    storageManagerModule.storeLastGeneratedProjectID(projectID);
+    return projectID;
 }
 
 function generateTodoListID() {
-    return ++todoListID;
+    todoListID += 1
+    storageManagerModule.storeLastGeneratedTodoListID(todoListID);
+    return todoListID;
 }
 
 function generateCategoryID() {
-    return ++categoryId;
+    categoryId += 1
+    storageManagerModule.storeLastGeneratedCategoryID(categoryId);
+    return categoryId;
 }
 
 function generateTodoID() {
-    return ++todoId;
+    todoId += 1
+    storageManagerModule.storeLastGeneratedTodoID(todoId);
+    return todoId;
 }
 
 export { generateProjectID, generateTodoListID, generateTodoID, generateCategoryID };
