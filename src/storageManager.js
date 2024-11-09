@@ -15,14 +15,16 @@ let projects = JSON.parse(localStorage.getItem(projectsKey)) || [];
 projects = Array.isArray(projects) ? projects : [projects];
 
 const todoListsKey = "todoLists";
-const todoLits = JSON.parse(localStorage.getItem(todoListsKey)) || [];
+let todoLits = JSON.parse(localStorage.getItem(todoListsKey)) || [];
+todoLits = Array.isArray(todoLits) ? todoLits : [todoLits];
 
 const categoriesKey = "categories";
-const categories = JSON.parse(localStorage.getItem(categoriesKey)) || [];
+let categories = JSON.parse(localStorage.getItem(categoriesKey)) || [];
+categories = Array.isArray(categories) ? categories : [categories];
 
 const todosKey = "todos";
-const todos = JSON.parse(localStorage.getItem(todosKey)) || [];
-
+let todos = JSON.parse(localStorage.getItem(todosKey)) || [];
+todos = Array.isArray(todos) ? todos : [todos];
 
 function storeProject(project) {
     if (projects.some(p => p.id === project.id)) return;
