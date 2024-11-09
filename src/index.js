@@ -56,6 +56,7 @@ function deleteProjectClicked(event) {
     const project = getProject(projectID);
     projects.splice(projects.indexOf(project), 1);
     domGeneratorModule.removeProjectElement(projectID);
+    project.removeAllTodoLists();
     storageManagerModule.removeProject(projectID);
     console.log(projects);
 }
@@ -153,7 +154,6 @@ function deleteTodoListClicked(event) {
     const project = getProject(projectID);
     project.removeTodoList(todoListID);
     domGeneratorModule.removeTodoListElement(todoListID);
-    storageManagerModule.removeTodoList(todoListID);
 
     console.log(projects);
 }
@@ -290,6 +290,14 @@ function addTodoConfirmed(event) {
     console.log(projects);
 }
 
-// storageManagerModule.cleareStorage();
+document.addEventListener("keydown", function (event) {
+    console.log("Key pressed:", event.key); // Logs the key that was pressed
+    console.log("Key code:", event.code);   // Logs the code of the key
+
+    if (event.key === "Delete") {
+        storageManagerModule.cleareStorage();
+    }
+});
+
 loadStoredProjects();
 loadStoredTodoLists();

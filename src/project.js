@@ -1,5 +1,6 @@
 import * as todoListModule from "./todoList";
 import * as priorityModule from "./priority";
+import * as storageManagerModule from "./storageManager";
 
 class Project {
     #todoLists;
@@ -22,16 +23,24 @@ class Project {
     }
 
     removeTodoList(id) {
+        console.log(id);
         const todoList = this.#todoLists.find(list => list.id === id);
         this.#todoLists.splice(this.#todoLists.indexOf(todoList), 1);
+        storageManagerModule.removeTodoList(id);
     }
 
     setTitle(title) {
         this.title = title;
     }
 
-    getTodoList(id){
+    getTodoList(id) {
         return this.#todoLists.find(todoList => todoList.id === id);
+    }
+
+    removeAllTodoLists() {
+        this.todoLists.forEach(todoList => {
+            this.removeTodoList(todoList.id);
+        });
     }
 }
 
