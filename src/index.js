@@ -212,7 +212,7 @@ function addCategoryConfirmed(event) {
     const category = new Category(idsGeneratorModule.generateCategoryID, categoryTitle);
     const todoList = project.getTodoList(todoListID);
     todoList.addNewCategory(category.id, category.title);
-    domGeneratorModule.addCateogryElement(category.id, category.title);
+    domGeneratorModule.createCategoryElement(category.id, category.title);
 
     console.log(projects);
 }

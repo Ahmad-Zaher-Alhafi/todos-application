@@ -149,7 +149,7 @@ function displayTodoList(id, projectID, title, descreption, categories) {
     });
 }
 
-function addCateogryElement(id, title) {
+function createCategoryElement(id, title) {
     const category = categoryPrefab.cloneNode(true);
     category.setAttribute("categoryID", id);
     const categoryTitle = category.querySelector(".categoryTitle");
@@ -165,6 +165,6 @@ const editTodoListConfigurationElemnt = createTextConfigurationElement("TodoList
 const addCategoryConfigurationElemnt = createTextConfigurationElement("Category title:");
 
 export {
-    createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, setTodoListTitle, displayTodoList, addCateogryElement,
+    createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, setTodoListTitle, displayTodoList, createCategoryElement,
     projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, editTodoListConfigurationElemnt, addCategoryConfigurationElemnt, todoListDisplay,
 };
