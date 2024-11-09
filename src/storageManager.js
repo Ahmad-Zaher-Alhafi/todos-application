@@ -33,8 +33,8 @@ function storeProject(project) {
     localStorage.setItem(projectsKey, JSON.stringify(projects));
 }
 
-function removeProject(project) {
-    projects.splice(projects.find(p => p.id === project.id), 1);
+function removeProject(projectID) {
+    projects.splice(projects.indexOf(projects.find(p => p.id === projectID)), 1);
     localStorage.setItem(projectsKey, JSON.stringify(projects));
 }
 
