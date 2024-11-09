@@ -11,7 +11,7 @@ class Project {
     }
 
     get todoLists() {
-        return Object.freeze(...this.#todoLists);
+        return Object.freeze([...this.#todoLists]);
     }
 
     addNewTodoList(id, title, description, dueDate, priority = priorityModule.Priority.Normal) {
