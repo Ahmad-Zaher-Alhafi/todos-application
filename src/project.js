@@ -23,7 +23,6 @@ class Project {
     }
 
     removeTodoList(id) {
-        console.log(id);
         const todoList = this.#todoLists.find(list => list.id === id);
         this.#todoLists.splice(this.#todoLists.indexOf(todoList), 1);
         storageManagerModule.removeTodoList(id);
