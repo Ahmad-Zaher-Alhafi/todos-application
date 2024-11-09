@@ -4,6 +4,7 @@ import * as projectModule from "./project";
 import * as domGeneratorModule from "./domGenerator";
 import * as priorityModule from "./priority";
 import * as idsGeneratorModule from "./idsGenerator";
+import * as storageManagerModule from "./storageManager";
 
 const projects = [];
 
@@ -25,11 +26,27 @@ function addProjectClicked() {
 
 function addProjectConfirmed(event) {
     const configurationTitleInput = event.target.parentElement.querySelector(".configurationTitleInput");
-    const project = new projectModule.Project(idsGeneratorModule.generateProjectID(), configurationTitleInput.value);
-    projects.push(project);
-    domGeneratorModule.createProjectElement(project.id, project.title);
+    const projectTitle = configurationTitleInput.value;
+    addProject(idsGeneratorModule.generateProjectID(), projectTitle);
 
     console.log(projects);
+}
+
+function addProject(id, title) {
+    const project = new projectModule.Project(id, title);
+    projects.push(project);
+    domGeneratorModule.createProjectElement(project.id, project.title);
+    storageManagerModule.storeProject(project);
+
+    console.log(storageManagerModule.getProjects());
+}
+
+function loadStoredProjects() {
+    const savedProjects = storageManagerModule.getProjects();
+
+    savedProjects.forEach(project => {
+        addProject(project.id, project.title);
+    });
 }
 
 document.addEventListener("deleteProjectClicked", deleteProjectClicked);
@@ -257,3 +274,6 @@ function addTodoConfirmed(event) {
 
     console.log(projects);
 }
+
+
+loadStoredProjects();
