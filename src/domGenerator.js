@@ -10,10 +10,10 @@ const textConfigurationPrefab = document.querySelector(".projectConfiguration");
 textConfigurationPrefab.remove();
 
 const categoryPrefab = document.querySelector(".category");
-categoryPrefab.remove();
+// categoryPrefab.remove();
 
 const todoListDisplay = document.querySelector(".todoListDisplay");
-todoListDisplay.remove();
+// todoListDisplay.remove();
 
 const displayArea = document.querySelector(".displayArea");
 
