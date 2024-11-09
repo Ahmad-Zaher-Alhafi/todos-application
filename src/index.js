@@ -90,7 +90,7 @@ function editProjectConfirmed(event) {
     const configurationTitleInput = event.detail.target.parentElement.querySelector(".configurationTitleInput");
     const projectTitle = configurationTitleInput.value;
     const project = getProject(event.detail.projectID);
-    const todoList = project.setTitle(projectTitle);
+    project.setTitle(projectTitle);
     domGeneratorModule.setProjectTitle(project.id, projectTitle);
 
     console.log(projects);
