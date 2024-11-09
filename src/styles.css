@@ -252,6 +252,20 @@ body {
     gap: 20px;
 }
 
+.addTodoSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.addTodoHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
 .todo {
     display: flex;
     flex-direction: column;
