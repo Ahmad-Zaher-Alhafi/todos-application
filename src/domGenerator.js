@@ -9,8 +9,8 @@ projectPrefab.remove();
 const textConfigurationPrefab = document.querySelector(".projectConfiguration");
 textConfigurationPrefab.remove();
 
-const todoListDisplayPrefab = document.querySelector(".todoListDisplay");
-todoListDisplayPrefab.remove();
+const todoListDisplay = document.querySelector(".todoListDisplay");
+todoListDisplay.remove();
 
 const displayArea = document.querySelector(".displayArea");
 
@@ -129,19 +129,25 @@ function removeTodoListElement(id) {
 }
 
 function displayTodoList(title, descreption, categories) {
-    displayArea.appendChild(todoListDisplayPrefab);
-    todoListDisplayPrefab.querySelector(".todoListTitle").textContent = title;
-    todoListDisplayPrefab.querySelector(".todoListDesc").textContent = descreption;
+    displayArea.appendChild(todoListDisplay);
+    todoListDisplay.querySelector(".todoListTitle").textContent = title;
+    todoListDisplay.querySelector(".todoListDesc").textContent = descreption;
 
+    const addCategoryButton = todoListDisplay.querySelector(".addCategoryButton");
+    addCategoryButton.addEventListener("click", () => {
+        const customEvent = new CustomEvent("addCategoryClicked");
+        document.dispatchEvent(customEvent);
+    });
 }
 
 
 const projectConfigurationElemnt = createTextConfigurationElement("Project title:");
 const editProjectConfigurationElemnt = createTextConfigurationElement("Project new title:");
 const todoListConfigurationElemnt = createTextConfigurationElement("TodoList title:");
-const edittodoListConfigurationElemnt = createTextConfigurationElement("TodoList new title:");
+const editTodoListConfigurationElemnt = createTextConfigurationElement("TodoList new title:");
+const addCategoryConfigurationElemnt = createTextConfigurationElement("Category title:");
 
 export {
     createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, setTodoListTitle, displayTodoList,
-    projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, edittodoListConfigurationElemnt
+    projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, editTodoListConfigurationElemnt, addCategoryConfigurationElemnt, todoListDisplay,
 };

@@ -130,7 +130,7 @@ function deleteTodoListClicked(event) {
 document.addEventListener("editTodoListClicked", editTodoListClicked);
 
 function editTodoListClicked(event) {
-    const editTodoListConfigurationElemnt = domGeneratorModule.edittodoListConfigurationElemnt;
+    const editTodoListConfigurationElemnt = domGeneratorModule.editTodoListConfigurationElemnt;
     editTodoListConfigurationElemnt.remove();
     const todoListID = event.detail.todoListID;
     const projectID = event.detail.projectID;
@@ -175,4 +175,12 @@ function todoListClicked(event) {
     const todoList = project.getTodoList(todoListID);
 
     domGeneratorModule.displayTodoList(todoList.title, todoList.description);
+}
+
+document.addEventListener("addCategoryClicked", addCategoryClicked);
+
+function addCategoryClicked() {
+   const addCategorySection = domGeneratorModule.todoListDisplay.querySelector(".addCategorySection");
+   const addCategoryConfigurationElemnt = domGeneratorModule.addCategoryConfigurationElemnt;
+   addCategorySection.appendChild(addCategoryConfigurationElemnt);
 }
