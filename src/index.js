@@ -1,11 +1,9 @@
 import "./styles.css";
 import { compareAsc, format } from "date-fns";
 import * as projectModule from "./project";
-import * as todoListModule from "./todoList";
 import * as domGeneratorModule from "./domGenerator";
 import * as priorityModule from "./priority";
 import * as idsGeneratorModule from "./idsGenerator";
-import * as categoryModule from "./category";
 
 const projects = [];
 
@@ -229,8 +227,33 @@ function addTodoClicked(event) {
     const addTodoConfigurationElemnt = domGeneratorModule.addTodoConfigurationElemnt;
     addTodoSection.appendChild(addTodoConfigurationElemnt);
 
-    // let configurationConfirmButton = addTodoConfigurationElemnt.querySelector(".configurationConfirmButton");
-    // addTodoConfigurationElemnt.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
-    // configurationConfirmButton = addTodoConfigurationElemnt.querySelector(".configurationConfirmButton");
-    // configurationConfirmButton.addEventListener("click", (event) => createCategoryConfirmedEvent(event, projectID, todoListID));
+    let configurationConfirmButton = addTodoConfigurationElemnt.querySelector(".configurationConfirmButton");
+    addTodoConfigurationElemnt.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
+    configurationConfirmButton = addTodoConfigurationElemnt.querySelector(".configurationConfirmButton");
+    configurationConfirmButton.addEventListener("click", (event) => createTodoConfirmedEvent(event, projectID, todoListID, categoryID));
+}
+
+function createTodoConfirmedEvent(event, projectID, todoListID, categoryID) {
+    const customEvent = new CustomEvent("addTodoConfirmed", {
+        detail: { target: event.target, projectID, todoListID, categoryID }
+    });
+
+    document.dispatchEvent(customEvent);
+}
+
+document.addEventListener("addTodoConfirmed", addTodoConfirmed);
+
+function addTodoConfirmed(event) {
+    const configurationTitleInput = event.detail.target.parentElement.querySelector(".configurationTitleInput");
+    const todoTitle = configurationTitleInput.value;
+    const project = getProject(event.detail.projectID);
+    const todoListID = event.detail.todoListID;
+    const todoList = project.getTodoList(todoListID);
+    const categoryID = event.detail.categoryID;
+    const category = todoList.getCategory(categoryID);
+
+    const todo = category.addNewTodo(idsGeneratorModule.generateTodoID, todoTitle, "Todo desc", format(new Date(2024, 9, 1), "yyyy-mm-dd"), priorityModule.Priority.High);
+    domGeneratorModule.createTodoElement(todo.id, todo.title, todo.description, todo.dueDate, todo.priority);
+
+    console.log(projects);
 }

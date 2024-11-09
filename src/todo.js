@@ -8,11 +8,6 @@ class Todo {
         this.dueDate = dueDate;
         this.priority = priority;
     }
-
-    // setTitle();
-    // setDescriptoin();
-    // setDueDate();
-    // setPriority();
 }
 
 export { Todo };

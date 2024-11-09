@@ -17,9 +17,10 @@ class Category {
     addNewTodo(id, title, description, dueDate, priority = priorityModule.Priority.Normal) {
         const todo = new todoModule.Todo(id, title, description, dueDate, priority);
         this.#todos.push(todo)
+        return todo;
     }
 
-    removeTodoList(id) {
+    removeTodo(id) {
 
     }
 }

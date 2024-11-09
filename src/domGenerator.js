@@ -9,17 +9,21 @@ projectPrefab.remove();
 const textConfigurationPrefab = document.querySelector(".projectConfiguration");
 textConfigurationPrefab.remove();
 
+const todoPrefab = document.querySelector(".todo");
+todoPrefab.remove();
+
 const categoryPrefab = document.querySelector(".category");
- categoryPrefab.remove();
+categoryPrefab.remove();
 
 const todoListDisplay = document.querySelector(".todoListDisplay");
- todoListDisplay.remove();
+todoListDisplay.remove();
 
 const displayArea = document.querySelector(".displayArea");
 
 const projectElements = [];
 const todoListElements = [];
 const categoryElements = [];
+const todoElements = [];
 
 function createTextConfigurationElement(labelText) {
     const textConfiguration = textConfigurationPrefab.cloneNode(true);
@@ -158,8 +162,8 @@ function createCategoryElement(id, todoListID, projectID, title) {
     todoCategories.appendChild(category);
 
     const categoryID = id;
-    todoListID = id;
-    projectID = id;
+    todoListID = todoListID;
+    projectID = projectID;
 
 
     const addTodoButton = category.querySelector(".addTodoButton");
@@ -175,6 +179,27 @@ function getCategory(id) {
     return categoryElements.find(category => category.getAttribute("categoryID") === id.toString());
 }
 
+function createTodoElement(id, title, descreption, dueDate, priority) {
+    const todo = todoPrefab.cloneNode(true);
+    todo.setAttribute("todoID", id);
+    todoElements.push(todo);
+    const todoTitle = todo.querySelector(".todoTitle");
+    todoTitle.textContent = title;
+    const todoDesc = todo.querySelector(".todoDesc");
+    todoDesc.textContent = descreption;
+    const todoDueDate = todo.querySelector(".todoDueDate");
+    todoDueDate.textContent = dueDate;
+    const todoPriority = todo.querySelector(".todoPriority");
+    todoPriority.textContent = priority;
+
+    const categoryTodos = todoListDisplay.querySelector(".categoryTodos");
+    categoryTodos.appendChild(todo);
+}
+
+function getTdo(id) {
+    return todoElements.find(todo => todo.getAttribute("todoID") === id.toString());
+}
+
 const projectConfigurationElemnt = createTextConfigurationElement("Project title:");
 const editProjectConfigurationElemnt = createTextConfigurationElement("Project new title:");
 const todoListConfigurationElemnt = createTextConfigurationElement("TodoList title:");
@@ -183,6 +208,7 @@ const addCategoryConfigurationElemnt = createTextConfigurationElement("Category 
 const addTodoConfigurationElemnt = createTextConfigurationElement("Todo title:");
 
 export {
-    createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, setTodoListTitle, displayTodoList, createCategoryElement, getCategory,
+    createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, setTodoListTitle, displayTodoList, createCategoryElement, getCategory, createTodoElement,
+    getTdo,
     projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, editTodoListConfigurationElemnt, addCategoryConfigurationElemnt, todoListDisplay, addTodoConfigurationElemnt,
 };
