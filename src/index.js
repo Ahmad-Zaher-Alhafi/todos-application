@@ -5,6 +5,7 @@ import * as todoListModule from "./todoList";
 import * as domGeneratorModule from "./domGenerator";
 import * as priorityModule from "./priority";
 import * as idsGeneratorModule from "./idsGenerator";
+import { Category } from "./category";
 
 const projects = [];
 
@@ -174,13 +175,44 @@ function todoListClicked(event) {
     const project = getProject(projectId);
     const todoList = project.getTodoList(todoListID);
 
-    domGeneratorModule.displayTodoList(todoList.title, todoList.description);
+    domGeneratorModule.displayTodoList(todoListID, projectId, todoList.title, todoList.description);
 }
 
 document.addEventListener("addCategoryClicked", addCategoryClicked);
 
-function addCategoryClicked() {
-   const addCategorySection = domGeneratorModule.todoListDisplay.querySelector(".addCategorySection");
-   const addCategoryConfigurationElemnt = domGeneratorModule.addCategoryConfigurationElemnt;
-   addCategorySection.appendChild(addCategoryConfigurationElemnt);
+function addCategoryClicked(event) {
+    const projectID = event.detail.projectID;
+    const todoListID = event.detail.todoListID;
+
+    const addCategorySection = domGeneratorModule.todoListDisplay.querySelector(".addCategorySection");
+    const addCategoryConfigurationElemnt = domGeneratorModule.addCategoryConfigurationElemnt;
+    addCategorySection.appendChild(addCategoryConfigurationElemnt);
+
+    let configurationConfirmButton = addCategoryConfigurationElemnt.querySelector(".configurationConfirmButton");
+    addCategoryConfigurationElemnt.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
+    configurationConfirmButton = addCategoryConfigurationElemnt.querySelector(".configurationConfirmButton");
+    configurationConfirmButton.addEventListener("click", (event) => createCategoryConfirmedEvent(event, projectID, todoListID));
+}
+
+function createCategoryConfirmedEvent(event, projectID, todoListID) {
+    const customEvent = new CustomEvent("addCategoryConfirmed", {
+        detail: { target: event.target, projectID, todoListID }
+    });
+
+    document.dispatchEvent(customEvent);
+}
+
+document.addEventListener("addCategoryConfirmed", addCategoryConfirmed);
+
+function addCategoryConfirmed(event) {
+    const configurationTitleInput = event.detail.target.parentElement.querySelector(".configurationTitleInput");
+    const categoryTitle = configurationTitleInput.value;
+    const project = getProject(event.detail.projectID);
+    const todoListID = event.detail.todoListID;
+    const category = new Category(idsGeneratorModule.generateCategoryID, categoryTitle);
+    const todoList = project.getTodoList(todoListID);
+    todoList.addNewCategory(category.id, category.title);
+    domGeneratorModule.addCateogryElement(category.id, category.title);
+
+    console.log(projects);
 }

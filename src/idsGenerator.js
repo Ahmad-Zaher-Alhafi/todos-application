@@ -11,7 +11,7 @@ function generateTodoListID() {
     return ++todoListID;
 }
 
-function generateCAtegoryID() {
+function generateCategoryID() {
     return ++categoryId;
 }
 
@@ -19,4 +19,4 @@ function generateTodoID() {
     return ++todoId;
 }
 
-export { generateProjectID, generateTodoListID, generateTodoID, generateCAtegoryID };
+export { generateProjectID, generateTodoListID, generateTodoID, generateCategoryID };
