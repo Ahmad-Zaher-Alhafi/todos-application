@@ -45,8 +45,8 @@ function storeTodoList(todoList) {
     localStorage.setItem(todoListsKey, JSON.stringify(todoLits));
 }
 
-function removeTodoList(todoList) {
-    todoLits.splice(todoLits.indexOf(todoLits.find(t => t.id == todoList.id)), 1);
+function removeTodoList(todoListID) {
+    todoLits.splice(todoLits.indexOf(todoLits.find(t => t.id == todoListID)), 1);
     localStorage.setItem(todoListsKey, JSON.stringify(todoLits));
 }
 

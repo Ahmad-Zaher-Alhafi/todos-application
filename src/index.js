@@ -151,10 +151,9 @@ function deleteTodoListClicked(event) {
     const projectID = event.detail.projectID;
     const todoListID = event.detail.todoListID;
     const project = getProject(projectID);
-    const todoList = project.getTodoList(todoListID);
-    storageManagerModule.removeTodoList(todoList);
     project.removeTodoList(todoListID);
     domGeneratorModule.removeTodoListElement(todoListID);
+    storageManagerModule.removeTodoList(todoListID);
 
     console.log(projects);
 }
