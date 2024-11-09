@@ -45,6 +45,11 @@ function storeTodoList(todoList) {
     localStorage.setItem(todoListsKey, JSON.stringify(todoLits));
 }
 
+function removeTodoList(todoList) {
+    todoLits.splice(todoLits.indexOf(todoLits.find(t => t.id == todoList.id)), 1);
+    localStorage.setItem(todoListsKey, JSON.stringify(todoLits));
+}
+
 function storeCategory(category) {
     if (categories.some(c => c.id === category.id)) return;
 
@@ -101,5 +106,5 @@ export {
     cleareStorage,
     lastGeneratedProjectID, lastGeneratedTodoListID, lastGeneratedCategoryID, lastGeneratedTodoID,
     storeLastGeneratedProjectID, storeLastGeneratedTodoListID, storeLastGeneratedCategoryID, storeLastGeneratedTodoID,
-    removeProject,
+    removeProject, removeTodoList,
 };

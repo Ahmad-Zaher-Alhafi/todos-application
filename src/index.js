@@ -123,12 +123,26 @@ document.addEventListener("addTodoListConfirmed", addTodoListConfirmed);
 function addTodoListConfirmed(event) {
     const configurationTitleInput = event.detail.target.parentElement.querySelector(".configurationTitleInput");
     const todoListTitle = configurationTitleInput.value;
-    const project = getProject(event.detail.projectID)
-    const todoListID = idsGeneratorModule.generateTodoListID();
-    const todoList = project.addNewTodoList(todoListID, project.id, todoListTitle, "Todo list discreption", format(new Date(1, 5, 2025), "dd-mm-yyyy"), priorityModule.Priority.High);
-    domGeneratorModule.createTodoListElement(todoList.id, project.id, todoList.title);
 
+    const projectID = event.detail.projectID;
+    const todoListID = idsGeneratorModule.generateTodoListID();
+    addTodoList(todoListID, projectID, todoListTitle, "Todo list discreption", format(new Date(1, 5, 2025), "dd-mm-yyyy"), priorityModule.Priority.High);
     console.log(projects);
+}
+
+function addTodoList(todoListID, projectID, todoListTitle, todoListDesc, dueDate, priority) {
+    const project = getProject(projectID)
+    const todoList = project.addNewTodoList(todoListID, projectID, todoListTitle, todoListDesc, dueDate, priority);
+    domGeneratorModule.createTodoListElement(todoList.id, project.id, todoList.title);
+    storageManagerModule.storeTodoList(todoList);
+}
+
+function loadStoredTodoLists() {
+    const savedTodoLists = storageManagerModule.getTodoLists();
+
+    savedTodoLists.forEach(todoList => {
+        addTodoList(todoList.id, todoList.projectID, todoList.title, todoList.description, todoList.dueDate, todoList.priority);
+    });
 }
 
 document.addEventListener("deleteTodoListClicked", deleteTodoListClicked);
@@ -137,6 +151,8 @@ function deleteTodoListClicked(event) {
     const projectID = event.detail.projectID;
     const todoListID = event.detail.todoListID;
     const project = getProject(projectID);
+    const todoList = project.getTodoList(todoListID);
+    storageManagerModule.removeTodoList(todoList);
     project.removeTodoList(todoListID);
     domGeneratorModule.removeTodoListElement(todoListID);
 
@@ -277,3 +293,4 @@ function addTodoConfirmed(event) {
 
 // storageManagerModule.cleareStorage();
 loadStoredProjects();
+loadStoredTodoLists();
