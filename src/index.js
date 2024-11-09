@@ -212,7 +212,26 @@ function addCategoryConfirmed(event) {
     const category = new Category(idsGeneratorModule.generateCategoryID, categoryTitle);
     const todoList = project.getTodoList(todoListID);
     todoList.addNewCategory(category.id, category.title);
-    domGeneratorModule.createCategoryElement(category.id, category.title);
+    domGeneratorModule.createCategoryElement(category.id, todoList.id, project.id, category.title);
 
     console.log(projects);
+}
+
+document.addEventListener("addTodoClicked", addTodoClicked);
+
+function addTodoClicked(event) {
+    const projectID = event.detail.projectID;
+    const todoListID = event.detail.todoListID;
+    const categoryID = event.detail.categoryID;
+
+    const category = domGeneratorModule.getCategory(categoryID, todoListID, projectID);
+
+    const addTodoSection = category.querySelector(".addTodoSection");
+    const addTodoConfigurationElemnt = domGeneratorModule.addTodoConfigurationElemnt;
+    addTodoSection.appendChild(addTodoConfigurationElemnt);
+
+    // let configurationConfirmButton = addTodoConfigurationElemnt.querySelector(".configurationConfirmButton");
+    // addTodoConfigurationElemnt.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
+    // configurationConfirmButton = addTodoConfigurationElemnt.querySelector(".configurationConfirmButton");
+    // configurationConfirmButton.addEventListener("click", (event) => createCategoryConfirmedEvent(event, projectID, todoListID));
 }

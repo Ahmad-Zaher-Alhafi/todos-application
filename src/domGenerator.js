@@ -10,10 +10,10 @@ const textConfigurationPrefab = document.querySelector(".projectConfiguration");
 textConfigurationPrefab.remove();
 
 const categoryPrefab = document.querySelector(".category");
-// categoryPrefab.remove();
+ categoryPrefab.remove();
 
 const todoListDisplay = document.querySelector(".todoListDisplay");
-// todoListDisplay.remove();
+ todoListDisplay.remove();
 
 const displayArea = document.querySelector(".displayArea");
 
@@ -121,7 +121,6 @@ function createTodoListElement(id, projectID, title) {
     });
 }
 
-
 function getTodoList(todoListID) {
     return todoListElements.find(todoList => todoList.getAttribute("todoListID") === todoListID.toString());
 }
@@ -149,13 +148,31 @@ function displayTodoList(id, projectID, title, descreption, categories) {
     });
 }
 
-function createCategoryElement(id, title) {
+function createCategoryElement(id, todoListID, projectID, title) {
     const category = categoryPrefab.cloneNode(true);
     category.setAttribute("categoryID", id);
+    categoryElements.push(category);
     const categoryTitle = category.querySelector(".categoryTitle");
     categoryTitle.textContent = title;
     const todoCategories = todoListDisplay.querySelector(".todoCategories");
     todoCategories.appendChild(category);
+
+    const categoryID = id;
+    todoListID = id;
+    projectID = id;
+
+
+    const addTodoButton = category.querySelector(".addTodoButton");
+    addTodoButton.addEventListener("click", () => {
+        const event = new CustomEvent("addTodoClicked", {
+            detail: { projectID, todoListID, categoryID }
+        });
+        document.dispatchEvent(event);
+    });
+}
+
+function getCategory(id) {
+    return categoryElements.find(category => category.getAttribute("categoryID") === id.toString());
 }
 
 const projectConfigurationElemnt = createTextConfigurationElement("Project title:");
@@ -163,8 +180,9 @@ const editProjectConfigurationElemnt = createTextConfigurationElement("Project n
 const todoListConfigurationElemnt = createTextConfigurationElement("TodoList title:");
 const editTodoListConfigurationElemnt = createTextConfigurationElement("TodoList new title:");
 const addCategoryConfigurationElemnt = createTextConfigurationElement("Category title:");
+const addTodoConfigurationElemnt = createTextConfigurationElement("Todo title:");
 
 export {
-    createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, setTodoListTitle, displayTodoList, createCategoryElement,
-    projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, editTodoListConfigurationElemnt, addCategoryConfigurationElemnt, todoListDisplay,
+    createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, setTodoListTitle, displayTodoList, createCategoryElement, getCategory,
+    projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, editTodoListConfigurationElemnt, addCategoryConfigurationElemnt, todoListDisplay, addTodoConfigurationElemnt,
 };
