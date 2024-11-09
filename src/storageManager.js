@@ -33,6 +33,11 @@ function storeProject(project) {
     localStorage.setItem(projectsKey, JSON.stringify(projects));
 }
 
+function removeProject(project) {
+    projects.splice(projects.find(p => p.id === project.id), 1);
+    localStorage.setItem(projectsKey, JSON.stringify(projects));
+}
+
 function storeTodoList(todoList) {
     if (todoLits.includes(todoList)) return;
 
@@ -96,4 +101,5 @@ export {
     cleareStorage,
     lastGeneratedProjectID, lastGeneratedTodoListID, lastGeneratedCategoryID, lastGeneratedTodoID,
     storeLastGeneratedProjectID, storeLastGeneratedTodoListID, storeLastGeneratedCategoryID, storeLastGeneratedTodoID,
+    removeProject,
 };
