@@ -20,6 +20,7 @@ class TodoList {
     addNewCategory(id, title) {
         const category = new categoryModule.Category(id, title);
         this.#categories.push(category)
+        return category;
     }
 
     removeCategory(id) {

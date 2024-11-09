@@ -5,7 +5,7 @@ import * as todoListModule from "./todoList";
 import * as domGeneratorModule from "./domGenerator";
 import * as priorityModule from "./priority";
 import * as idsGeneratorModule from "./idsGenerator";
-import { Category } from "./category";
+import * as categoryModule from "./category";
 
 const projects = [];
 
@@ -209,9 +209,8 @@ function addCategoryConfirmed(event) {
     const categoryTitle = configurationTitleInput.value;
     const project = getProject(event.detail.projectID);
     const todoListID = event.detail.todoListID;
-    const category = new Category(idsGeneratorModule.generateCategoryID, categoryTitle);
     const todoList = project.getTodoList(todoListID);
-    todoList.addNewCategory(category.id, category.title);
+    const category = todoList.addNewCategory(idsGeneratorModule.generateCategoryID, categoryTitle);
     domGeneratorModule.createCategoryElement(category.id, todoList.id, project.id, category.title);
 
     console.log(projects);
