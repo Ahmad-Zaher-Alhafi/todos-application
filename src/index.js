@@ -30,8 +30,6 @@ function addProjectConfirmed(event) {
     const configurationTitleInput = event.target.parentElement.querySelector(".configurationTitleInput");
     const projectTitle = configurationTitleInput.value;
     addProject(idsGeneratorModule.generateProjectID(), projectTitle);
-
-    console.log(projects);
 }
 
 function addProject(id, title) {
@@ -39,8 +37,6 @@ function addProject(id, title) {
     projects.push(project);
     domGeneratorModule.createProjectElement(project.id, project.title);
     storageManagerModule.storeProject(project);
-
-    console.log(storageManagerModule.getProjects());
 }
 
 function loadStoredProjects() {
@@ -60,7 +56,6 @@ function deleteProjectClicked(event) {
     domGeneratorModule.removeProjectElement(projectID);
     project.removeAllTodoLists();
     storageManagerModule.removeProject(projectID);
-    console.log(projects);
 }
 
 document.addEventListener("editProjectClicked", editProjectClicked);
@@ -95,8 +90,6 @@ function editProjectConfirmed(event) {
     const project = getProject(event.detail.projectID);
     project.setTitle(projectTitle);
     domGeneratorModule.setProjectTitle(project.id, projectTitle);
-
-    console.log(projects);
 }
 
 document.addEventListener("addTodoListClicked", addTodoListClicked);
@@ -130,7 +123,6 @@ function addTodoListConfirmed(event) {
     const projectID = event.detail.projectID;
     const todoListID = idsGeneratorModule.generateTodoListID();
     addTodoList(todoListID, projectID, todoListTitle, "Todo list discreption", format(new Date(1, 5, 2025), "dd-mm-yyyy"), priorityModule.Priority.High);
-    console.log(projects);
 }
 
 function addTodoList(todoListID, projectID, todoListTitle, todoListDesc, dueDate, priority) {
@@ -156,8 +148,6 @@ function deleteTodoListClicked(event) {
     const project = getProject(projectID);
     project.removeTodoList(todoListID);
     domGeneratorModule.removeTodoListElement(todoListID);
-
-    console.log(projects);
 }
 
 document.addEventListener("editTodoListClicked", editTodoListClicked);
@@ -194,8 +184,6 @@ function editTodoListConfirmed(event) {
     const todoList = project.getTodoList(todoListID);
     todoList.setTitle(todoListTitle);
     domGeneratorModule.setTodoListTitle(todoListID, todoListTitle);
-
-    console.log(projects);
 }
 
 document.addEventListener("todoListClicked", todoListClicked);
@@ -232,17 +220,15 @@ function addCategoryConfirmed(event) {
 
     const projectID = displayedProject.id;
     const todoListID = displayedTodoList.id;
-    console.log(todoListID);
 
     addCategory(idsGeneratorModule.generateCategoryID(), todoListID, projectID, categoryTitle);
-    console.log(projects);
 }
 
 function addCategory(id, todoListID, projectID, title) {
     const project = getProject(projectID);
     const todoList = project.getTodoList(todoListID);
     const category = todoList.addNewCategory(id, todoListID, projectID, title);
-    domGeneratorModule.createCategoryElement(id, todoListID, projectID, title);
+    domGeneratorModule.createCategoryElement(id, title);
 
     storageManagerModule.storeCategory(category);
 }
@@ -258,8 +244,8 @@ function loadStoredCategories() {
 document.addEventListener("addTodoClicked", addTodoClicked);
 
 function addTodoClicked(event) {
-    const projectID = event.detail.projectID;
-    const todoListID = event.detail.todoListID;
+    const projectID = displayedProject.id;
+    const todoListID = displayedTodoList.id;
     const categoryID = event.detail.categoryID;
 
     const category = domGeneratorModule.getCategory(categoryID, todoListID, projectID);
@@ -271,12 +257,12 @@ function addTodoClicked(event) {
     let configurationConfirmButton = addTodoConfigurationElemnt.querySelector(".configurationConfirmButton");
     addTodoConfigurationElemnt.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
     configurationConfirmButton = addTodoConfigurationElemnt.querySelector(".configurationConfirmButton");
-    configurationConfirmButton.addEventListener("click", (event) => createTodoConfirmedEvent(event, projectID, todoListID, categoryID));
+    configurationConfirmButton.addEventListener("click", (event) => createTodoConfirmedEvent(event, categoryID));
 }
 
-function createTodoConfirmedEvent(event, projectID, todoListID, categoryID) {
+function createTodoConfirmedEvent(event, categoryID) {
     const customEvent = new CustomEvent("addTodoConfirmed", {
-        detail: { target: event.target, projectID, todoListID, categoryID }
+        detail: { target: event.target, categoryID }
     });
 
     document.dispatchEvent(customEvent);
@@ -285,18 +271,25 @@ function createTodoConfirmedEvent(event, projectID, todoListID, categoryID) {
 document.addEventListener("addTodoConfirmed", addTodoConfirmed);
 
 function addTodoConfirmed(event) {
+
     const configurationTitleInput = event.detail.target.parentElement.querySelector(".configurationTitleInput");
     const todoTitle = configurationTitleInput.value;
-    const project = getProject(event.detail.projectID);
-    const todoListID = event.detail.todoListID;
-    const todoList = project.getTodoList(todoListID);
+
     const categoryID = event.detail.categoryID;
+    console.log(categoryID);
+
+    addTodo(idsGeneratorModule.generateTodoID(), categoryID, displayedTodoList.id, displayedProject.id, todoTitle, "Todo desc", format(new Date(2024, 9, 1), "yyyy-mm-dd"), priorityModule.Priority.High);
+}
+
+function addTodo(id, categoryID, todoListID, projectID, title, descreption, dueDate, priority) {
+    const project = getProject(projectID);
+    const todoList = project.getTodoList(todoListID);
     const category = todoList.getCategory(categoryID);
 
-    const todo = category.addNewTodo(idsGeneratorModule.generateTodoID, todoTitle, "Todo desc", format(new Date(2024, 9, 1), "yyyy-mm-dd"), priorityModule.Priority.High);
-    domGeneratorModule.createTodoElement(todo.id, todo.title, todo.description, todo.dueDate, todo.priority);
+    const todo = category.addNewTodo(id, title, descreption, dueDate, priority);
+    domGeneratorModule.createTodoElement(id, categoryID, title, descreption, dueDate, priority);
 
-    console.log(projects);
+    storageManagerModule.storeTodo(todo);
 }
 
 document.addEventListener("keydown", function (event) {
@@ -306,6 +299,15 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
+function loadStoredTodos() {
+    const savedTodos = storageManagerModule.getTodos();
+
+    savedTodos.forEach(todo => {
+        addTodo(todo.id, todo.categoryID, todo.todoListID, todo.projectID, todo.title, todo.descreption, todo.dueDate, todo.priority);
+    });
+}
+
 loadStoredProjects();
 loadStoredTodoLists();
 loadStoredCategories();
+loadStoredTodos();

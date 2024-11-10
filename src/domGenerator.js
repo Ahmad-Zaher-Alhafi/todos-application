@@ -145,6 +145,7 @@ function displayTodoList(title, descreption, catrgories) {
     todoListDisplay.querySelector(".todoListDesc").textContent = descreption;
 
     showCategoriesInDisplayPage(catrgories);
+    showTodosInAllCategories(catrgories);
 
     let addCategoryButton = addCategoryHeader.querySelector(".addCategoryButton");
     addCategoryHeader.replaceChild(addCategoryButton.cloneNode(true), addCategoryButton);
@@ -159,7 +160,7 @@ function showCategoriesInDisplayPage(catrgories) {
     hideAllCategories();
 
     catrgories.forEach(category => {
-        createCategoryElement(category.id, category.todoListID, category.projectID, category.title);
+        createCategoryElement(category.id, category.title);
     });
 }
 
@@ -171,7 +172,29 @@ function hideAllCategories() {
     categoryElements.length = 0;
 }
 
-function createCategoryElement(id, todoListID, projectID, title) {
+function showTodosInAllCategories(catrgories) {
+    hideAllTodos();
+    catrgories.forEach(category => {
+        showTodosInCategory(category);
+    });
+}
+
+function showTodosInCategory(category) {
+    category.getAllTodos().forEach(todo => {
+        createTodoElement(todo.id, category.id, todo.title, todo.dueDate, todo.priority);
+    });
+}
+
+function hideAllTodos() {
+    todoElements.forEach(todoElement => {
+        todoElement.remove();
+    });
+
+    todoElements.length = 0;
+}
+
+function createCategoryElement(id, title) {
+    console.log(title);
     const category = categoryPrefab.cloneNode(true);
     category.setAttribute("categoryID", id);
     categoryElements.push(category);
@@ -180,14 +203,11 @@ function createCategoryElement(id, todoListID, projectID, title) {
     todoCategories.appendChild(category);
 
     const categoryID = id;
-    todoListID = todoListID;
-    projectID = projectID;
-
 
     const addTodoButton = category.querySelector(".addTodoButton");
     addTodoButton.addEventListener("click", () => {
         const event = new CustomEvent("addTodoClicked", {
-            detail: { projectID, todoListID, categoryID }
+            detail: { categoryID }
         });
         document.dispatchEvent(event);
     });
@@ -197,7 +217,7 @@ function getCategory(id) {
     return categoryElements.find(category => category.getAttribute("categoryID") === id.toString());
 }
 
-function createTodoElement(id, title, descreption, dueDate, priority) {
+function createTodoElement(id, categoryID, title, descreption, dueDate, priority) {
     const todo = todoPrefab.cloneNode(true);
     todo.setAttribute("todoID", id);
     todoElements.push(todo);
@@ -210,7 +230,8 @@ function createTodoElement(id, title, descreption, dueDate, priority) {
     const todoPriority = todo.querySelector(".todoPriority");
     todoPriority.textContent = priority;
 
-    const categoryTodos = todoListDisplay.querySelector(".categoryTodos");
+    const categoryElement = getCategory(categoryID)
+    const categoryTodos = categoryElement.querySelector(".categoryTodos");
     categoryTodos.appendChild(todo);
 }
 

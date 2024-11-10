@@ -13,17 +13,21 @@ class Category {
     }
 
     get todos() {
-        return Object.freeze(...this.#todos);
+        return Object.freeze([...this.#todos]);
     }
 
     addNewTodo(id, title, description, dueDate, priority = priorityModule.Priority.Normal) {
-        const todo = new todoModule.Todo(id, title, description, dueDate, priority);
+        const todo = new todoModule.Todo(id, this.id, this.todoListID, this.projectID, title, description, dueDate, priority);
         this.#todos.push(todo)
         return todo;
     }
 
     removeTodo(id) {
 
+    }
+
+    getAllTodos() {
+        return this.todos;
     }
 }
 
