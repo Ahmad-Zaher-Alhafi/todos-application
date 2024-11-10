@@ -69,10 +69,20 @@ function storeCategory(category) {
     localStorage.setItem(categoriesKey, JSON.stringify(categories));
 }
 
+function removeCategory(categoryID) {
+    categories.splice(categories.indexOf(categories.find(c => c.id == categoryID)), 1);
+    localStorage.setItem(categoriesKey, JSON.stringify(categories));
+}
+
 function storeTodo(todo) {
     if (todos.some(t => t.id === todo.id)) return;
 
     todos.push(todo);
+    localStorage.setItem(todosKey, JSON.stringify(todos));
+}
+
+function removeTodo(todoID) {
+    todos.splice(todos.indexOf(todos.find(t => t.id == todoID)), 1);
     localStorage.setItem(todosKey, JSON.stringify(todos));
 }
 
@@ -118,5 +128,5 @@ export {
     cleareStorage,
     lastGeneratedProjectID, lastGeneratedTodoListID, lastGeneratedCategoryID, lastGeneratedTodoID,
     storeLastGeneratedProjectID, storeLastGeneratedTodoListID, storeLastGeneratedCategoryID, storeLastGeneratedTodoID,
-    removeProject, removeTodoList,
+    removeProject, removeTodoList, removeCategory, removeTodo,
 };

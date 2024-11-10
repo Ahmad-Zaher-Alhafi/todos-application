@@ -1,5 +1,5 @@
 import * as priorityModule from "./priority";
-
+import * as storageManagerModule from "./storageManager";
 import * as todoModule from "./todo";
 
 class Category {
@@ -23,11 +23,19 @@ class Category {
     }
 
     removeTodo(id) {
-
+        const todo = this.#todos.find(todo => todo.id === id);
+        this.#todos.splice(this.#todos.indexOf(todo), 1);
+        storageManagerModule.removeTodo(id);
     }
 
     getAllTodos() {
         return this.todos;
+    }
+
+    removeAllTodos() {
+        this.todos.forEach(todo => {
+            this.removeTodo(todo.id);
+        });
     }
 }
 
