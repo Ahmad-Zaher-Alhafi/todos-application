@@ -2,8 +2,8 @@ import * as storageManagerModule from "./storageManager";
 
 let projectID = storageManagerModule.lastGeneratedProjectID;
 let todoListID = storageManagerModule.lastGeneratedTodoListID;
-let todoId = storageManagerModule.lastGeneratedCategoryID;
-let categoryId = storageManagerModule.lastGeneratedTodoID;
+let categoryId = storageManagerModule.lastGeneratedCategoryID;
+let todoId = storageManagerModule.lastGeneratedTodoID;
 
 function generateProjectID() {
     projectID += 1

@@ -14,11 +14,11 @@ class TodoList {
     }
 
     get categories() {
-        return Object.freeze(...this.#categories);
+        return Object.freeze([...this.#categories]);
     }
 
-    addNewCategory(id, title) {
-        const category = new categoryModule.Category(id, title);
+    addNewCategory(id, todoListID, projectID, title) {
+        const category = new categoryModule.Category(id, todoListID, projectID, title);
         this.#categories.push(category)
         return category;
     }
@@ -33,6 +33,10 @@ class TodoList {
 
     getCategory(id) {
         return this.#categories.find(category => category.id === id);
+    }
+
+    getAllCategories() {
+        return this.categories;
     }
 
 }

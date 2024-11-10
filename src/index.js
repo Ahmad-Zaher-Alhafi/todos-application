@@ -7,6 +7,8 @@ import * as idsGeneratorModule from "./idsGenerator";
 import * as storageManagerModule from "./storageManager";
 
 const projects = [];
+let displayedTodoList;
+let displayedProject;
 
 const addProjectButton = document.querySelector(".addProjectButton");
 addProjectButton.addEventListener("click", addProjectClicked);
@@ -204,16 +206,16 @@ function todoListClicked(event) {
 
     const project = getProject(projectId);
     const todoList = project.getTodoList(todoListID);
+    displayedTodoList = todoList;
+    displayedProject = project;
 
-    domGeneratorModule.displayTodoList(todoListID, projectId, todoList.title, todoList.description);
+    const categories = todoList.getAllCategories();
+    domGeneratorModule.displayTodoList(todoList.title, todoList.description, categories);
 }
 
 document.addEventListener("addCategoryClicked", addCategoryClicked);
 
-function addCategoryClicked(event) {
-    const projectID = event.detail.projectID;
-    const todoListID = event.detail.todoListID;
-
+function addCategoryClicked() {
     const addCategorySection = domGeneratorModule.todoListDisplay.querySelector(".addCategorySection");
     const addCategoryConfigurationElemnt = domGeneratorModule.addCategoryConfigurationElemnt;
     addCategorySection.appendChild(addCategoryConfigurationElemnt);
@@ -221,29 +223,36 @@ function addCategoryClicked(event) {
     let configurationConfirmButton = addCategoryConfigurationElemnt.querySelector(".configurationConfirmButton");
     addCategoryConfigurationElemnt.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
     configurationConfirmButton = addCategoryConfigurationElemnt.querySelector(".configurationConfirmButton");
-    configurationConfirmButton.addEventListener("click", (event) => createCategoryConfirmedEvent(event, projectID, todoListID));
+    configurationConfirmButton.addEventListener("click", addCategoryConfirmed);
 }
-
-function createCategoryConfirmedEvent(event, projectID, todoListID) {
-    const customEvent = new CustomEvent("addCategoryConfirmed", {
-        detail: { target: event.target, projectID, todoListID }
-    });
-
-    document.dispatchEvent(customEvent);
-}
-
-document.addEventListener("addCategoryConfirmed", addCategoryConfirmed);
 
 function addCategoryConfirmed(event) {
-    const configurationTitleInput = event.detail.target.parentElement.querySelector(".configurationTitleInput");
+    const configurationTitleInput = event.target.parentElement.querySelector(".configurationTitleInput");
     const categoryTitle = configurationTitleInput.value;
-    const project = getProject(event.detail.projectID);
-    const todoListID = event.detail.todoListID;
-    const todoList = project.getTodoList(todoListID);
-    const category = todoList.addNewCategory(idsGeneratorModule.generateCategoryID, categoryTitle);
-    domGeneratorModule.createCategoryElement(category.id, todoList.id, project.id, category.title);
 
+    const projectID = displayedProject.id;
+    const todoListID = displayedTodoList.id;
+    console.log(todoListID);
+
+    addCategory(idsGeneratorModule.generateCategoryID(), todoListID, projectID, categoryTitle);
     console.log(projects);
+}
+
+function addCategory(id, todoListID, projectID, title) {
+    const project = getProject(projectID);
+    const todoList = project.getTodoList(todoListID);
+    const category = todoList.addNewCategory(id, todoListID, projectID, title);
+    domGeneratorModule.createCategoryElement(id, todoListID, projectID, title);
+
+    storageManagerModule.storeCategory(category);
+}
+
+function loadStoredCategories() {
+    const savedCategories = storageManagerModule.getCategories();
+
+    savedCategories.forEach(category => {
+        addCategory(category.id, category.todoListID, category.projectID, category.title);
+    });
 }
 
 document.addEventListener("addTodoClicked", addTodoClicked);
@@ -301,3 +310,4 @@ document.addEventListener("keydown", function (event) {
 
 loadStoredProjects();
 loadStoredTodoLists();
+loadStoredCategories();

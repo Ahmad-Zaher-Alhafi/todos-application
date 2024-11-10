@@ -5,8 +5,10 @@ import * as todoModule from "./todo";
 class Category {
     #todos = [];
 
-    constructor(id, title) {
+    constructor(id, todoListID, projectID, title) {
         this.id = id;
+        this.todoListID = todoListID;
+        this.projectID = projectID;
         this.title = title;
     }
 

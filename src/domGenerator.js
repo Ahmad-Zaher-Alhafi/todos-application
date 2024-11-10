@@ -15,8 +15,12 @@ todoPrefab.remove();
 const categoryPrefab = document.querySelector(".category");
 categoryPrefab.remove();
 
+const addCategoryHeader = document.querySelector(".addCategoryHeader");
+
 const todoListDisplay = document.querySelector(".todoListDisplay");
 todoListDisplay.remove();
+
+const todoCategories = todoListDisplay.querySelector(".todoCategories");
 
 const displayArea = document.querySelector(".displayArea");
 
@@ -135,21 +139,36 @@ function removeTodoListElement(id) {
     todoListToRemove.remove();
 }
 
-function displayTodoList(id, projectID, title, descreption, categories) {
+function displayTodoList(title, descreption, catrgories) {
     displayArea.appendChild(todoListDisplay);
     todoListDisplay.querySelector(".todoListTitle").textContent = title;
     todoListDisplay.querySelector(".todoListDesc").textContent = descreption;
 
-    const todoListID = id;
-    projectID = projectID;
+    showCategoriesInDisplayPage(catrgories);
 
-    const addCategoryButton = todoListDisplay.querySelector(".addCategoryButton");
+    let addCategoryButton = addCategoryHeader.querySelector(".addCategoryButton");
+    addCategoryHeader.replaceChild(addCategoryButton.cloneNode(true), addCategoryButton);
+    addCategoryButton = addCategoryHeader.querySelector(".addCategoryButton");
     addCategoryButton.addEventListener("click", () => {
-        const customEvent = new CustomEvent("addCategoryClicked", {
-            detail: { projectID, todoListID }
-        });
+        const customEvent = new CustomEvent("addCategoryClicked");
         document.dispatchEvent(customEvent);
     });
+}
+
+function showCategoriesInDisplayPage(catrgories) {
+    hideAllCategories();
+
+    catrgories.forEach(category => {
+        createCategoryElement(category.id, category.todoListID, category.projectID, category.title);
+    });
+}
+
+function hideAllCategories() {
+    categoryElements.forEach(categoryElement => {
+        categoryElement.remove();
+    });
+
+    categoryElements.length = 0;
 }
 
 function createCategoryElement(id, todoListID, projectID, title) {
@@ -158,7 +177,6 @@ function createCategoryElement(id, todoListID, projectID, title) {
     categoryElements.push(category);
     const categoryTitle = category.querySelector(".categoryTitle");
     categoryTitle.textContent = title;
-    const todoCategories = todoListDisplay.querySelector(".todoCategories");
     todoCategories.appendChild(category);
 
     const categoryID = id;
