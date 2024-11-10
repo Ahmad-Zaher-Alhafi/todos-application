@@ -85,6 +85,10 @@ function setTodoListTitle(id, title) {
     const todoList = getTodoList(id);
     todoList.querySelector(".todoListTitle").textContent = title;
 }
+
+function setCategoryTitle(id, title) {
+    const category = getCategory(id);
+    category.querySelector(".categoryTitle").textContent = title;
 }
 
 function getProject(projectID) {
@@ -212,6 +216,14 @@ function createCategoryElement(id, title) {
         });
         document.dispatchEvent(event);
     });
+
+    const editCategoryButton = category.querySelector(".editCategoryButton");
+    editCategoryButton.addEventListener("click", () => {
+        const event = new CustomEvent("editCategoryClicked", {
+            detail: { categoryID }
+        });
+        document.dispatchEvent(event);
+    });
 }
 
 function getCategory(id) {
@@ -246,9 +258,10 @@ const todoListConfigurationElemnt = createTextConfigurationElement("TodoList tit
 const editTodoListConfigurationElemnt = createTextConfigurationElement("TodoList new title:");
 const addCategoryConfigurationElemnt = createTextConfigurationElement("Category title:");
 const addTodoConfigurationElemnt = createTextConfigurationElement("Todo title:");
+const editCategoryConfigurationElemnt = createTextConfigurationElement("Category title:");
 
 export {
     createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, setTodoListTitle, displayTodoList, createCategoryElement, getCategory, createTodoElement,
-    getTdo,
-    projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, editTodoListConfigurationElemnt, addCategoryConfigurationElemnt, todoListDisplay, addTodoConfigurationElemnt,
+    getTdo, setCategoryTitle,
+    projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, editTodoListConfigurationElemnt, addCategoryConfigurationElemnt, todoListDisplay, addTodoConfigurationElemnt, editCategoryConfigurationElemnt,
 };

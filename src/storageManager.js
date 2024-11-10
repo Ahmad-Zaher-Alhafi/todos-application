@@ -69,9 +69,15 @@ function removeTodoList(todoListID) {
 }
 
 function storeCategory(category) {
-    if (categories.some(c => c.id === category.id)) return;
+    const sameStoredCategory = categories.find(c => c.id === category.id);
 
-    categories.push(category);
+    if (sameStoredCategory !== undefined) {
+        // If already exist then just replace it with the new one that has new information
+        categories[categories.indexOf(sameStoredCategory)] = category;
+    } else {
+        categories.push(category);
+    }
+
     localStorage.setItem(categoriesKey, JSON.stringify(categories));
 }
 

@@ -37,6 +37,10 @@ class Category {
             this.removeTodo(todo.id);
         });
     }
+
+    setTitle(title) {
+        this.title = title;
+    }
 }
 
 export { Category };

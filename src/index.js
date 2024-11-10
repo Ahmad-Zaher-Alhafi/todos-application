@@ -253,6 +253,42 @@ function loadStoredCategories() {
     });
 }
 
+document.addEventListener("editCategoryClicked", editCategoryClicked);
+
+function editCategoryClicked(event) {
+    const editCategoryConfigurationElemnt = domGeneratorModule.editCategoryConfigurationElemnt;
+    editCategoryConfigurationElemnt.remove();
+    const categoryID = event.detail.categoryID;
+    const category = domGeneratorModule.getCategory(categoryID);
+    category.querySelector(".categoryHeader").appendChild(editCategoryConfigurationElemnt);
+
+    let configurationConfirmButton = editCategoryConfigurationElemnt.querySelector(".configurationConfirmButton");
+    editCategoryConfigurationElemnt.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
+    configurationConfirmButton = editCategoryConfigurationElemnt.querySelector(".configurationConfirmButton");
+    configurationConfirmButton.addEventListener("click", (event) => createEditCategoryConfirmedEvent(event, categoryID));
+}
+
+function createEditCategoryConfirmedEvent(event, categoryID) {
+    const customEvent = new CustomEvent("editCategoryConfirmed", {
+        detail: { target: event.target, categoryID }
+    });
+
+    document.dispatchEvent(customEvent);
+}
+
+document.addEventListener("editCategoryConfirmed", editCategoryConfirmed);
+
+function editCategoryConfirmed(event) {
+    const configurationTitleInput = event.detail.target.parentElement.querySelector(".configurationTitleInput");
+    const categoryTitle = configurationTitleInput.value;
+    const categoryID = event.detail.categoryID;
+    const category = displayedTodoList.getCategory(categoryID);
+    category.setTitle(categoryTitle);
+    domGeneratorModule.setCategoryTitle(categoryID, categoryTitle);
+    storageManagerModule.storeCategory(category);
+}
+
+
 document.addEventListener("addTodoClicked", addTodoClicked);
 
 function addTodoClicked(event) {
