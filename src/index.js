@@ -288,6 +288,13 @@ function editCategoryConfirmed(event) {
     storageManagerModule.storeCategory(category);
 }
 
+document.addEventListener("deleteCategoryClicked", deleteCategoryClicked);
+
+function deleteCategoryClicked(event) {
+    const categoryID = event.detail.categoryID;
+    displayedTodoList.removeCategory(categoryID);
+    domGeneratorModule.removeCategoryElement(categoryID);
+}
 
 document.addEventListener("addTodoClicked", addTodoClicked);
 

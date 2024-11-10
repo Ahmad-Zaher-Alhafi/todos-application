@@ -144,6 +144,12 @@ function removeTodoListElement(id) {
     todoListToRemove.remove();
 }
 
+function removeCategoryElement(id) {
+    const categoryToRemove = getCategory(id);
+    categoryElements.splice(categoryElements.indexOf(categoryToRemove), 1);
+    categoryToRemove.remove();
+}
+
 function displayTodoList(title, description, catrgories) {
     displayArea.appendChild(todoListDisplay);
     todoListDisplay.querySelector(".todoListTitle").textContent = title;
@@ -224,6 +230,14 @@ function createCategoryElement(id, title) {
         });
         document.dispatchEvent(event);
     });
+
+    const deleteCategoryButton = category.querySelector(".deleteCategoryButton");
+    deleteCategoryButton.addEventListener("click", () => {
+        const event = new CustomEvent("deleteCategoryClicked", {
+            detail: { categoryID }
+        });
+        document.dispatchEvent(event);
+    });
 }
 
 function getCategory(id) {
@@ -262,6 +276,6 @@ const editCategoryConfigurationElemnt = createTextConfigurationElement("Category
 
 export {
     createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, setTodoListTitle, displayTodoList, createCategoryElement, getCategory, createTodoElement,
-    getTdo, setCategoryTitle,
+    getTdo, setCategoryTitle, removeCategoryElement,
     projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, editTodoListConfigurationElemnt, addCategoryConfigurationElemnt, todoListDisplay, addTodoConfigurationElemnt, editCategoryConfigurationElemnt,
 };
