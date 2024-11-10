@@ -237,10 +237,17 @@ body {
     gap: 20px;
 }
 
-.categoryTitle {
+.categoryHeader {
+    display: flex;
+    align-self: flex-start;
+    gap: 20px;
+
     border-bottom-style: solid;
     border-width: 2px;
     padding-bottom: 10px;
+}
+
+.categoryTitle {
     font-size: x-large;
     font-weight: bold;
 }
