@@ -385,6 +385,16 @@ function createEditTodoConfirmed(event) {
     storageManagerModule.storeTodo(todo);
 }
 
+document.addEventListener("deleteTodoClicked", deleteTodoClicked);
+
+function deleteTodoClicked(event) {
+    const categoryID = event.detail.categoryID;
+    const todoID = event.detail.todoID;
+    const category = displayedTodoList.getCategory(categoryID);
+    category.removeTodo(todoID);
+    domGeneratorModule.removeTodoElement(todoID);
+}
+
 document.addEventListener("keydown", function (event) {
     if (event.key === "Delete") {
         storageManagerModule.cleareStorage();

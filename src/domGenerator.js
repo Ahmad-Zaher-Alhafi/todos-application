@@ -155,6 +155,12 @@ function removeCategoryElement(id) {
     categoryToRemove.remove();
 }
 
+function removeTodoElement(id) {
+    const todoToRemove = getTodo(id);
+    todoElements.splice(todoElements.indexOf(todoToRemove), 1);
+    todoToRemove.remove();
+}
+
 function displayTodoList(title, description, catrgories) {
     displayArea.appendChild(todoListDisplay);
     todoListDisplay.querySelector(".todoListTitle").textContent = title;
@@ -276,6 +282,14 @@ function createTodoElement(id, categoryID, title, description, dueDate, priority
         });
         document.dispatchEvent(event);
     });
+
+    const deleteTodoButton = todo.querySelector(".deleteTodoButton");
+    deleteTodoButton.addEventListener("click", () => {
+        const event = new CustomEvent("deleteTodoClicked", {
+            detail: { todoID, categoryID }
+        });
+        document.dispatchEvent(event);
+    });
 }
 
 function getTodo(id) {
@@ -294,7 +308,7 @@ const editTodoConfigurationElemnt = createTextConfigurationElement("Todo title:"
 
 export {
     createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, setTodoListTitle, displayTodoList, createCategoryElement, getCategory, createTodoElement,
-    getTodo, setCategoryTitle, removeCategoryElement, setTodoTitle,
+    getTodo, setCategoryTitle, removeCategoryElement, setTodoTitle, removeTodoElement,
     projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, editTodoListConfigurationElemnt, addCategoryConfigurationElemnt, todoListDisplay, addTodoConfigurationElemnt, editCategoryConfigurationElemnt,
     editTodoConfigurationElemnt,
 };
