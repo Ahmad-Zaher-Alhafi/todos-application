@@ -185,6 +185,7 @@ function editTodoListConfirmed(event) {
     const todoList = project.getTodoList(todoListID);
     todoList.setTitle(todoListTitle);
     domGeneratorModule.setTodoListTitle(todoListID, todoListTitle);
+    storageManagerModule.storeTodoList(todoList);
 }
 
 document.addEventListener("todoListClicked", todoListClicked);

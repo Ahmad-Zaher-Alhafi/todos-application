@@ -32,7 +32,6 @@ function storeProject(project) {
     if (sameStoredProject !== undefined) {
         // If already exist then just replace it with the new one that has new information
         projects[projects.indexOf(sameStoredProject)] = project;
-
     } else {
         projects.push(project);
     }
@@ -46,9 +45,15 @@ function removeProject(projectID) {
 }
 
 function storeTodoList(todoList) {
-    if (todoLits.some(t => t.id === todoList.id)) return;
+    const sameStoredTodoList = todoLits.find(t => t.id === todoList.id);
 
-    todoLits.push(todoList);
+    if (sameStoredTodoList !== undefined) {
+        // If already exist then just replace it with the new one that has new information
+        todoLits[todoLits.indexOf(sameStoredTodoList)] = todoList;
+    } else {
+        todoLits.push(todoList);
+    }
+
     localStorage.setItem(todoListsKey, JSON.stringify(todoLits));
 }
 
