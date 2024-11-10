@@ -87,9 +87,15 @@ function removeCategory(categoryID) {
 }
 
 function storeTodo(todo) {
-    if (todos.some(t => t.id === todo.id)) return;
+    const sameStoredCategory = todos.find(t => t.id === todo.id);
 
-    todos.push(todo);
+    if (sameStoredCategory !== undefined) {
+        // If already exist then just replace it with the new one that has new information
+        todos[todos.indexOf(sameStoredCategory)] = todo;
+    } else {
+        todos.push(todo);
+    }
+
     localStorage.setItem(todosKey, JSON.stringify(todos));
 }
 

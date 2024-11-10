@@ -41,6 +41,10 @@ class Category {
     setTitle(title) {
         this.title = title;
     }
+
+    getTodo(id) {
+        return this.#todos.find(todo => todo.id === id);
+    }
 }
 
 export { Category };

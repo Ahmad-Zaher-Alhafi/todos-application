@@ -11,6 +11,10 @@ class Todo {
         this.dueDate = dueDate;
         this.priority = priority;
     }
+
+    setTitle(title) {
+        this.title = title;
+    }
 }
 
 export { Todo };

@@ -347,6 +347,44 @@ function addTodo(id, categoryID, todoListID, projectID, title, description, dueD
     storageManagerModule.storeTodo(todo);
 }
 
+document.addEventListener("editTodoClicked", editTodoClicked);
+
+function editTodoClicked(event) {
+    const editTodoConfigurationElemnt = domGeneratorModule.editTodoConfigurationElemnt;
+    editTodoConfigurationElemnt.remove();
+    const todoID = event.detail.todoID;
+    const categoryID = event.detail.categoryID;
+    const todo = domGeneratorModule.getTodo(todoID);
+    todo.querySelector(".todoHeader").appendChild(editTodoConfigurationElemnt);
+
+    let configurationConfirmButton = editTodoConfigurationElemnt.querySelector(".configurationConfirmButton");
+    editTodoConfigurationElemnt.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
+    configurationConfirmButton = editTodoConfigurationElemnt.querySelector(".configurationConfirmButton");
+    configurationConfirmButton.addEventListener("click", (event) => createEditTodoConfirmedEvent(event, todoID, categoryID));
+}
+
+function createEditTodoConfirmedEvent(event, todoID, categoryID) {
+    const customEvent = new CustomEvent("createEditTodoConfirmed", {
+        detail: { target: event.target, todoID, categoryID }
+    });
+
+    document.dispatchEvent(customEvent);
+}
+
+document.addEventListener("createEditTodoConfirmed", createEditTodoConfirmed);
+
+function createEditTodoConfirmed(event) {
+    const configurationTitleInput = event.detail.target.parentElement.querySelector(".configurationTitleInput");
+    const todoTitle = configurationTitleInput.value;
+    const todoID = event.detail.todoID;
+    const categoryID = event.detail.categoryID;;
+    const category = displayedTodoList.getCategory(categoryID);
+    const todo = category.getTodo(todoID);
+    todo.setTitle(todoTitle);
+    domGeneratorModule.setTodoTitle(todoID, todoTitle);
+    storageManagerModule.storeTodo(todo);
+}
+
 document.addEventListener("keydown", function (event) {
     if (event.key === "Delete") {
         storageManagerModule.cleareStorage();
