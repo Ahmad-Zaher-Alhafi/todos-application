@@ -35,6 +35,10 @@ class TodoList {
         this.title = title;
     }
 
+    setDescription(description) {
+        this.description = description;
+    }
+
     getCategory(id) {
         return this.#categories.find(category => category.id === id);
     }

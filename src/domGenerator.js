@@ -17,6 +17,17 @@ categoryPrefab.remove();
 
 const addCategoryHeader = document.querySelector(".addCategoryHeader");
 
+
+const descAreaPrefab = document.querySelector(".descArea");
+let todoListDescArea;
+let todoListDesc;
+let todoListAreaConfiguration;
+
+const todoListDisplayHeader = document.querySelector(".todoListDisplayHeader");
+
+const areaConfigurationPrefab = todoListDisplayHeader.querySelector(".areaConfiguration");
+areaConfigurationPrefab.remove();
+
 const todoListDisplay = document.querySelector(".todoListDisplay");
 todoListDisplay.remove();
 
@@ -84,6 +95,10 @@ function setProjectTitle(id, title) {
 function setTodoListTitle(id, title) {
     const todoList = getTodoList(id);
     todoList.querySelector(".todoListTitle").textContent = title;
+}
+
+function setTodoListDesc(desc) {
+    todoListDesc.textContent = desc;
 }
 
 function setCategoryTitle(id, title) {
@@ -161,10 +176,20 @@ function removeTodoElement(id) {
     todoToRemove.remove();
 }
 
+function showTodoListDescriptionArea(description) {
+    todoListAreaConfiguration?.remove();
+    todoListDescArea = createDescriptionArea(todoListDisplayHeader);
+    todoListDesc = todoListDescArea.querySelector(".todoListDesc");
+    setTodoListDesc(description);
+}
+
 function displayTodoList(title, description, catrgories) {
     displayArea.appendChild(todoListDisplay);
+
+    showTodoListDescriptionArea();
+
     todoListDisplay.querySelector(".todoListTitle").textContent = title;
-    todoListDisplay.querySelector(".todoListDesc").textContent = description;
+    todoListDesc.textContent = description;
 
     showCategoriesInDisplayPage(catrgories);
     showTodosInAllCategories(catrgories);
@@ -176,6 +201,55 @@ function displayTodoList(title, description, catrgories) {
         const customEvent = new CustomEvent("addCategoryClicked");
         document.dispatchEvent(customEvent);
     });
+
+    let editAreaButton = todoListDescArea.querySelector(".editAreaButton");
+    todoListDescArea.replaceChild(editAreaButton.cloneNode(true), editAreaButton);
+    editAreaButton = todoListDescArea.querySelector(".editAreaButton");
+    editAreaButton.addEventListener("click", () => {
+        const customEvent = new CustomEvent("editTodoListDescClicked");
+        document.dispatchEvent(customEvent);
+    });
+}
+
+function showTodoListAreaConfiguration() {
+    todoListAreaConfiguration = createAreaConfiguration(todoListDisplayHeader);
+    const configurationAreaInput = todoListAreaConfiguration.querySelector(".areaConfigurationInput");
+    configurationAreaInput.value = todoListDesc.textContent;
+    todoListDescArea.remove();
+
+    let areaConfigurationButton = todoListAreaConfiguration.querySelector(".areaConfigurationButton");
+    todoListAreaConfiguration.replaceChild(areaConfigurationButton.cloneNode(true), areaConfigurationButton);
+    areaConfigurationButton = todoListAreaConfiguration.querySelector(".areaConfigurationButton");
+    areaConfigurationButton.addEventListener("click", () => {
+        const customEvent = new CustomEvent("editTodoListDescConfirmed", {
+            detail: { newTodoListDesc: configurationAreaInput.value }
+        });
+        document.dispatchEvent(customEvent);
+    });
+}
+
+function createDescriptionArea(parentelement) {
+    let descArea = parentelement.querySelector(".descArea");
+
+    if (descArea == undefined) {
+        descArea = descAreaPrefab.cloneNode(true);
+    }
+
+    parentelement.appendChild(descArea);
+
+    return descArea;
+}
+
+function createAreaConfiguration(parentElement) {
+    let areaConfiguration = parentElement.querySelector(".areaConfigurationInput");
+
+    if (areaConfiguration == undefined) {
+        areaConfiguration = areaConfigurationPrefab.cloneNode(true);
+    }
+
+    parentElement.appendChild(areaConfiguration);
+
+    return areaConfiguration;
 }
 
 function showCategoriesInDisplayPage(catrgories) {
@@ -308,7 +382,7 @@ const editTodoConfigurationElemnt = createTextConfigurationElement("Todo title:"
 
 export {
     createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, setTodoListTitle, displayTodoList, createCategoryElement, getCategory, createTodoElement,
-    getTodo, setCategoryTitle, removeCategoryElement, setTodoTitle, removeTodoElement,
+    getTodo, setCategoryTitle, removeCategoryElement, setTodoTitle, removeTodoElement, showTodoListAreaConfiguration, setTodoListDesc, showTodoListDescriptionArea,
     projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, editTodoListConfigurationElemnt, addCategoryConfigurationElemnt, todoListDisplay, addTodoConfigurationElemnt, editCategoryConfigurationElemnt,
     editTodoConfigurationElemnt,
 };

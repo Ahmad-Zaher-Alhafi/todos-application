@@ -188,6 +188,21 @@ function editTodoListConfirmed(event) {
     storageManagerModule.storeTodoList(todoList);
 }
 
+document.addEventListener("editTodoListDescClicked", editTodoListDescClicked);
+
+function editTodoListDescClicked() {
+    domGeneratorModule.showTodoListAreaConfiguration();
+}
+
+document.addEventListener("editTodoListDescConfirmed", editTodoListDescConfirmed);
+
+function editTodoListDescConfirmed(event) {
+    const newTodoListDesc = event.detail.newTodoListDesc;
+    displayedTodoList.setDescription(newTodoListDesc);
+    domGeneratorModule.showTodoListDescriptionArea(newTodoListDesc);
+    storageManagerModule.storeTodoList(displayedTodoList);
+}
+
 document.addEventListener("todoListClicked", todoListClicked);
 
 function todoListClicked(event) {
