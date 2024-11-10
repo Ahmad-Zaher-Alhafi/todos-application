@@ -10,6 +10,12 @@ const lastGeneratedCategoryID = JSON.parse(localStorage.getItem(lastGeneratedCat
 const lastGeneratedTodoIDKey = "lastGeneratedTodoID";
 const lastGeneratedTodoID = JSON.parse(localStorage.getItem(lastGeneratedTodoIDKey)) || 0;
 
+const lastDisplayedProjectIndexKey = "lastDisplayedProjectIndex";
+const lastDisplayedProjectIndex = JSON.parse(localStorage.getItem(lastDisplayedProjectIndexKey));
+
+const lastDisplayedTodoListIndexKey = "lastDisplayedTodoListIndex";
+const lastDisplayedTodoListIndex = JSON.parse(localStorage.getItem(lastDisplayedTodoListIndexKey));
+
 const projectsKey = "projects";
 let projects = JSON.parse(localStorage.getItem(projectsKey)) || [];
 projects = Array.isArray(projects) ? projects : [projects];
@@ -90,6 +96,7 @@ function getProjects() {
     return projects;
 }
 
+
 function getTodoLists() {
     return todoLits;
 }
@@ -122,6 +129,14 @@ function storeLastGeneratedTodoID(id) {
     localStorage.setItem(lastGeneratedTodoIDKey, id);
 }
 
+function storeLastDisplayedProjectIndex(id) {
+    localStorage.setItem(lastDisplayedProjectIndexKey, id);
+}
+
+function storeLastDisplayedTodoListIndex(id) {
+    localStorage.setItem(lastDisplayedTodoListIndexKey, id);
+}
+
 export {
     storeProject, storeTodoList, storeCategory, storeTodo,
     getProjects, getTodoLists, getCategories, getTodos,
@@ -129,4 +144,5 @@ export {
     lastGeneratedProjectID, lastGeneratedTodoListID, lastGeneratedCategoryID, lastGeneratedTodoID,
     storeLastGeneratedProjectID, storeLastGeneratedTodoListID, storeLastGeneratedCategoryID, storeLastGeneratedTodoID,
     removeProject, removeTodoList, removeCategory, removeTodo,
+    storeLastDisplayedProjectIndex, storeLastDisplayedTodoListIndex, lastDisplayedProjectIndex, lastDisplayedTodoListIndex,
 };

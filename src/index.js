@@ -191,16 +191,26 @@ function editTodoListConfirmed(event) {
 document.addEventListener("todoListClicked", todoListClicked);
 
 function todoListClicked(event) {
-    const projectId = event.detail.projectID;
+    const projectID = event.detail.projectID;
     const todoListID = event.detail.todoListID;
+    displayTodoList(todoListID, projectID);
+}
 
-    const project = getProject(projectId);
+function displayTodoList(todoListID, projectID) {
+    if (todoListID == null || projectID == null) return;
+
+    const project = getProject(projectID);
     const todoList = project.getTodoList(todoListID);
+
     displayedTodoList = todoList;
     displayedProject = project;
 
     const categories = todoList.getAllCategories();
-    domGeneratorModule.displayTodoList(todoList.title, todoList.description, categories);
+
+    domGeneratorModule.displayTodoList(todoList.title, todoList.descreption, categories);
+
+    storageManagerModule.storeLastDisplayedProjectIndex(projectID);
+    storageManagerModule.storeLastDisplayedTodoListIndex(todoListID);
 }
 
 document.addEventListener("addCategoryClicked", addCategoryClicked);
@@ -309,7 +319,15 @@ function loadStoredTodos() {
     });
 }
 
+function loadLastDisplayedTodoList() {
+    const lastDisplayedProjectIndex = storageManagerModule.lastDisplayedProjectIndex;
+    const lastDisplayedTodoListIndex = storageManagerModule.lastDisplayedTodoListIndex;
+
+    displayTodoList(lastDisplayedTodoListIndex, lastDisplayedProjectIndex);
+}
+
 loadStoredProjects();
 loadStoredTodoLists();
 loadStoredCategories();
 loadStoredTodos();
+loadLastDisplayedTodoList();
