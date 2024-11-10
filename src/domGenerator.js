@@ -82,8 +82,9 @@ function setProjectTitle(id, title) {
 }
 
 function setTodoListTitle(id, title) {
-    const project = getTodoList(id);
-    project.querySelector(".todoListTitle").textContent = title;
+    const todoList = getTodoList(id);
+    todoList.querySelector(".todoListTitle").textContent = title;
+}
 }
 
 function getProject(projectID) {
