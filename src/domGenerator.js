@@ -139,10 +139,10 @@ function removeTodoListElement(id) {
     todoListToRemove.remove();
 }
 
-function displayTodoList(title, descreption, catrgories) {
+function displayTodoList(title, description, catrgories) {
     displayArea.appendChild(todoListDisplay);
     todoListDisplay.querySelector(".todoListTitle").textContent = title;
-    todoListDisplay.querySelector(".todoListDesc").textContent = descreption;
+    todoListDisplay.querySelector(".todoListDesc").textContent = description;
 
     showCategoriesInDisplayPage(catrgories);
     showTodosInAllCategories(catrgories);
@@ -181,7 +181,7 @@ function showTodosInAllCategories(catrgories) {
 
 function showTodosInCategory(category) {
     category.getAllTodos().forEach(todo => {
-        createTodoElement(todo.id, category.id, todo.title, todo.dueDate, todo.priority);
+        createTodoElement(todo.id, category.id, todo.title, todo.description, todo.dueDate, todo.priority);
     });
 }
 
@@ -217,14 +217,14 @@ function getCategory(id) {
     return categoryElements.find(category => category.getAttribute("categoryID") === id.toString());
 }
 
-function createTodoElement(id, categoryID, title, descreption, dueDate, priority) {
+function createTodoElement(id, categoryID, title, description, dueDate, priority) {
     const todo = todoPrefab.cloneNode(true);
     todo.setAttribute("todoID", id);
     todoElements.push(todo);
     const todoTitle = todo.querySelector(".todoTitle");
     todoTitle.textContent = title;
     const todoDesc = todo.querySelector(".todoDesc");
-    todoDesc.textContent = descreption;
+    todoDesc.textContent = description;
     const todoDueDate = todo.querySelector(".todoDueDate");
     todoDueDate.textContent = dueDate;
     const todoPriority = todo.querySelector(".todoPriority");

@@ -207,7 +207,7 @@ function displayTodoList(todoListID, projectID) {
 
     const categories = todoList.getAllCategories();
 
-    domGeneratorModule.displayTodoList(todoList.title, todoList.descreption, categories);
+    domGeneratorModule.displayTodoList(todoList.title, todoList.description, categories);
 
     storageManagerModule.storeLastDisplayedProjectIndex(projectID);
     storageManagerModule.storeLastDisplayedTodoListIndex(todoListID);
@@ -293,13 +293,13 @@ function addTodoConfirmed(event) {
     addTodo(idsGeneratorModule.generateTodoID(), categoryID, displayedTodoList.id, displayedProject.id, todoTitle, "Todo desc", format(new Date(2024, 9, 1), "yyyy-mm-dd"), priorityModule.Priority.High);
 }
 
-function addTodo(id, categoryID, todoListID, projectID, title, descreption, dueDate, priority) {
+function addTodo(id, categoryID, todoListID, projectID, title, description, dueDate, priority) {
     const project = getProject(projectID);
     const todoList = project.getTodoList(todoListID);
     const category = todoList.getCategory(categoryID);
 
-    const todo = category.addNewTodo(id, title, descreption, dueDate, priority);
-    domGeneratorModule.createTodoElement(id, categoryID, title, descreption, dueDate, priority);
+    const todo = category.addNewTodo(id, title, description, dueDate, priority);
+    domGeneratorModule.createTodoElement(id, categoryID, title, description, dueDate, priority);
 
     storageManagerModule.storeTodo(todo);
 }
@@ -315,7 +315,7 @@ function loadStoredTodos() {
     const savedTodos = storageManagerModule.getTodos();
 
     savedTodos.forEach(todo => {
-        addTodo(todo.id, todo.categoryID, todo.todoListID, todo.projectID, todo.title, todo.descreption, todo.dueDate, todo.priority);
+        addTodo(todo.id, todo.categoryID, todo.todoListID, todo.projectID, todo.title, todo.description, todo.dueDate, todo.priority);
     });
 }
 
