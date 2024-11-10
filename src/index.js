@@ -90,6 +90,7 @@ function editProjectConfirmed(event) {
     const project = getProject(event.detail.projectID);
     project.setTitle(projectTitle);
     domGeneratorModule.setProjectTitle(project.id, projectTitle);
+    storageManagerModule.storeProject(project);
 }
 
 document.addEventListener("addTodoListClicked", addTodoListClicked);

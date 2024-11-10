@@ -27,9 +27,16 @@ let todos = JSON.parse(localStorage.getItem(todosKey)) || [];
 todos = Array.isArray(todos) ? todos : [todos];
 
 function storeProject(project) {
-    if (projects.some(p => p.id === project.id)) return;
+    const sameStoredProject = projects.find(p => p.id === project.id);
 
-    projects.push(project);
+    if (sameStoredProject !== undefined) {
+        // If already exist then just replace it with the new one that has new information
+        projects[projects.indexOf(sameStoredProject)] = project;
+
+    } else {
+        projects.push(project);
+    }
+
     localStorage.setItem(projectsKey, JSON.stringify(projects));
 }
 
