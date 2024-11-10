@@ -300,11 +300,9 @@ function addTodoConfirmed(event) {
 }
 
 document.addEventListener("keydown", function (event) {
-    console.log("Key pressed:", event.key); // Logs the key that was pressed
-    console.log("Key code:", event.code);   // Logs the code of the key
-
     if (event.key === "Delete") {
         storageManagerModule.cleareStorage();
+        console.log("Storage cleared!");
     }
 });
 
