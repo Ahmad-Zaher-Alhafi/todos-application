@@ -24,6 +24,8 @@ function addProjectClicked() {
     const configurationConfirmButton = document.querySelector(".configurationConfirmButton");
     configurationConfirmButton.removeEventListener("click", addProjectConfirmed)
     configurationConfirmButton.addEventListener("click", addProjectConfirmed)
+
+    configurationConfirmButton.parentElement.querySelector(".configurationTitleInput").focus();
 }
 
 function addProjectConfirmed(event) {
@@ -107,6 +109,8 @@ function addTodoListClicked(event) {
     todoListConfiguration.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton); // To get rid of all event listeners on the button
     configurationConfirmButton = todoListConfiguration.querySelector(".configurationConfirmButton");
     configurationConfirmButton.addEventListener("click", (event) => createAddTodoListConfirmedEvent(event, projectID));
+
+    configurationConfirmButton.parentElement.querySelector(".configurationTitleInput").focus();
 }
 
 function createAddTodoListConfirmedEvent(event, projectID) {
@@ -244,6 +248,8 @@ function addCategoryClicked() {
     addCategoryConfigurationElemnt.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
     configurationConfirmButton = addCategoryConfigurationElemnt.querySelector(".configurationConfirmButton");
     configurationConfirmButton.addEventListener("click", addCategoryConfirmed);
+
+    configurationConfirmButton.parentElement.querySelector(".configurationTitleInput").focus();
 }
 
 function addCategoryConfirmed(event) {
@@ -335,6 +341,8 @@ function addTodoClicked(event) {
     todoConfigurationElemnt.querySelector(".configurationButtons").replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
     configurationConfirmButton = todoConfigurationElemnt.querySelector(".configurationConfirmButton");
     configurationConfirmButton.addEventListener("click", () => createTodoConfirmedEvent(todoConfigurationElemnt, categoryID));
+
+    todoConfigurationElemnt.querySelector(".configurationTitleInput").focus();
 }
 
 function createTodoConfirmedEvent(todoConfigurationElemnt, categoryID) {
