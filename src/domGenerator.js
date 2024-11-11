@@ -181,6 +181,14 @@ function showTodoListDescriptionArea(description) {
     todoListDescArea = createDescriptionArea(todoListDisplayHeader);
     todoListDesc = todoListDescArea.querySelector(".todoListDesc");
     setTodoListDesc(description);
+
+    let editAreaButton = todoListDescArea.querySelector(".editAreaButton");
+    todoListDescArea.replaceChild(editAreaButton.cloneNode(true), editAreaButton);
+    editAreaButton = todoListDescArea.querySelector(".editAreaButton");
+    editAreaButton.addEventListener("click", () => {
+        const customEvent = new CustomEvent("editTodoListDescClicked");
+        document.dispatchEvent(customEvent);
+    });
 }
 
 function displayTodoList(title, description, catrgories) {
@@ -199,14 +207,6 @@ function displayTodoList(title, description, catrgories) {
     addCategoryButton = addCategoryHeader.querySelector(".addCategoryButton");
     addCategoryButton.addEventListener("click", () => {
         const customEvent = new CustomEvent("addCategoryClicked");
-        document.dispatchEvent(customEvent);
-    });
-
-    let editAreaButton = todoListDescArea.querySelector(".editAreaButton");
-    todoListDescArea.replaceChild(editAreaButton.cloneNode(true), editAreaButton);
-    editAreaButton = todoListDescArea.querySelector(".editAreaButton");
-    editAreaButton.addEventListener("click", () => {
-        const customEvent = new CustomEvent("editTodoListDescClicked");
         document.dispatchEvent(customEvent);
     });
 }
