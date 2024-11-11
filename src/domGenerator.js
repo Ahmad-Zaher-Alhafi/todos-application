@@ -36,6 +36,8 @@ areaConfigurationPrefab.remove();
 const todoListDisplay = document.querySelector(".todoListDisplay");
 todoListDisplay.remove();
 
+const emptyContentMessage = document.querySelector(".emptyContentMessage");
+
 const todoCategories = todoListDisplay.querySelector(".todoCategories");
 
 const displayArea = document.querySelector(".displayArea");
@@ -220,6 +222,8 @@ function showTodoListDescriptionArea(description) {
 }
 
 function displayTodoList(title, description, catrgories) {
+    emptyContentMessage.remove();
+
     displayArea.appendChild(todoListDisplay);
 
     showTodoListDescriptionArea();

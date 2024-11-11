@@ -417,3 +417,12 @@ input::placeholder {
 .todoSymbol{
     font-size: x-large;
 }
+
+.emptyContentMessage{
+    font-size: 50px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
