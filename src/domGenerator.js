@@ -182,6 +182,8 @@ function createTodoListElement(id, projectID, title) {
         });
         document.dispatchEvent(customEvent);
     });
+
+    displayTodoList(title)
 }
 
 function getTodoList(todoListID) {
@@ -286,6 +288,7 @@ function createAreaConfiguration(parentElement) {
 
 function showCategoriesInDisplayPage(catrgories) {
     hideAllCategories();
+    if (catrgories === undefined) return;
 
     catrgories.forEach(category => {
         createCategoryElement(category.id, category.title);
@@ -302,6 +305,8 @@ function hideAllCategories() {
 
 function showTodosInAllCategories(catrgories) {
     hideAllTodos();
+    if (catrgories === undefined) return;
+
     catrgories.forEach(category => {
         showTodosInCategory(category);
     });
