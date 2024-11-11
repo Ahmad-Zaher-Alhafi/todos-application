@@ -113,9 +113,17 @@ function setCategoryTitle(id, title) {
     category.querySelector(".categoryTitle").textContent = title;
 }
 
-function setTodoTitle(id, title) {
+function setTodoInfo(id, title, description, dueDate, priority) {
     const todo = getTodo(id);
-    todo.querySelector(".todoTitle").textContent = title;
+
+    const todoTitle = todo.querySelector(".todoTitle");
+    todoTitle.textContent = title;
+    const todoDesc = todo.querySelector(".todoDesc");
+    todoDesc.textContent = description;
+    const todoDueDate = todo.querySelector(".todoDueDate");
+    todoDueDate.textContent = dueDate;
+    const todoPriority = todo.querySelector(".todoPriority");
+    todoPriority.textContent = priority;
 }
 
 function getProject(projectID) {
@@ -340,14 +348,8 @@ function createTodoElement(id, categoryID, title, description, dueDate, priority
     const todo = todoPrefab.cloneNode(true);
     todo.setAttribute("todoID", id);
     todoElements.push(todo);
-    const todoTitle = todo.querySelector(".todoTitle");
-    todoTitle.textContent = title;
-    const todoDesc = todo.querySelector(".todoDesc");
-    todoDesc.textContent = description;
-    const todoDueDate = todo.querySelector(".todoDueDate");
-    todoDueDate.textContent = dueDate;
-    const todoPriority = todo.querySelector(".todoPriority");
-    todoPriority.textContent = priority;
+
+    setTodoInfo(id, title, description, dueDate, priority);
 
     const categoryElement = getCategory(categoryID)
     const categoryTodos = categoryElement.querySelector(".categoryTodos");
@@ -388,6 +390,6 @@ const editCategoryConfigurationElemnt = createTextConfigurationElement("Category
 
 export {
     createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, setTodoListTitle, displayTodoList, createCategoryElement, getCategory, createTodoElement,
-    getTodo, setCategoryTitle, removeCategoryElement, setTodoTitle, removeTodoElement, showTodoListAreaConfiguration, setTodoListDesc, showTodoListDescriptionArea,
+    getTodo, setCategoryTitle, removeCategoryElement, setTodoInfo, removeTodoElement, showTodoListAreaConfiguration, setTodoListDesc, showTodoListDescriptionArea,
     projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, editTodoListConfigurationElemnt, addCategoryConfigurationElemnt, todoListDisplay, todoConfigurationElemnt, editCategoryConfigurationElemnt,
 };

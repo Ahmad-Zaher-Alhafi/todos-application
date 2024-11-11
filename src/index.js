@@ -379,7 +379,7 @@ function editTodoClicked(event) {
     const todoID = event.detail.todoID;
     const categoryID = event.detail.categoryID;
     const todo = domGeneratorModule.getTodo(todoID);
-    todo.querySelector(".todoHeader").appendChild(todoConfigurationElemnt);
+    todo.appendChild(todoConfigurationElemnt);
 
     let configurationConfirmButton = todoConfigurationElemnt.querySelector(".configurationConfirmButton");
     todoConfigurationElemnt.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
@@ -388,24 +388,34 @@ function editTodoClicked(event) {
 }
 
 function createEditTodoConfirmedEvent(event, todoID, categoryID) {
-    const customEvent = new CustomEvent("createEditTodoConfirmed", {
+    const customEvent = new CustomEvent("editTodoConfirmed", {
         detail: { target: event.target, todoID, categoryID }
     });
 
     document.dispatchEvent(customEvent);
 }
 
-document.addEventListener("createEditTodoConfirmed", createEditTodoConfirmed);
+document.addEventListener("editTodoConfirmed", editTodoConfirmed);
 
-function createEditTodoConfirmed(event) {
+function editTodoConfirmed(event) {
     const configurationTitleInput = event.detail.target.parentElement.querySelector(".configurationTitleInput");
     const todoTitle = configurationTitleInput.value;
+
+    const configurationDescInput = event.detail.target.parentElement.querySelector(".configurationDescInput");
+    const todoDesc = configurationDescInput.value;
+
+    const configurationDueDateInput = event.detail.target.parentElement.querySelector(".configurationDueDateInput");
+    const todoDueDate = configurationDueDateInput.value;
+
+    const configurationPriorityDropDown = event.detail.target.parentElement.querySelector(".configurationPriorityDropDown");
+    const todoPriority = configurationPriorityDropDown.value;
+
     const todoID = event.detail.todoID;
     const categoryID = event.detail.categoryID;;
     const category = displayedTodoList.getCategory(categoryID);
     const todo = category.getTodo(todoID);
     todo.setTitle(todoTitle);
-    domGeneratorModule.setTodoTitle(todoID, todoTitle);
+    domGeneratorModule.setTodoInfo(todoID, todoTitle, todoDesc, todoDueDate, todoPriority);
     storageManagerModule.storeTodo(todo);
 }
 
