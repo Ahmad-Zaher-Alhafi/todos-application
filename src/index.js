@@ -31,6 +31,7 @@ function addProjectConfirmed(event) {
     let projectTitle = configurationTitleInput.value;
     projectTitle = projectTitle === "" ? "Project" : projectTitle;
     addProject(idsGeneratorModule.generateProjectID(), projectTitle);
+    event.target.parentElement.remove();
 }
 
 function addProject(id, title) {
@@ -127,7 +128,7 @@ function addTodoListConfirmed(event) {
     const todoListID = idsGeneratorModule.generateTodoListID();
     addTodoList(todoListID, projectID, todoListTitle, "Todo list description");
     displayTodoList(todoListID, projectID)
-
+    event.detail.target.parentElement.remove();
 }
 
 function addTodoList(todoListID, projectID, todoListTitle, todoListDescription) {
@@ -254,6 +255,7 @@ function addCategoryConfirmed(event) {
     const todoListID = displayedTodoList.id;
 
     addCategory(idsGeneratorModule.generateCategoryID(), todoListID, projectID, categoryTitle);
+    event.target.parentElement.remove();
 }
 
 function addCategory(id, todoListID, projectID, title) {
@@ -364,6 +366,8 @@ function addTodoConfirmed(event) {
     const categoryID = event.detail.categoryID;
 
     addTodo(idsGeneratorModule.generateTodoID(), categoryID, displayedTodoList.id, displayedProject.id, todoTitle, todoDesc, todoDueDate, todoPriority, false);
+
+    event.detail.target.remove();
 }
 
 function addTodo(id, categoryID, todoListID, projectID, title, description, dueDate, priority, isDone) {
