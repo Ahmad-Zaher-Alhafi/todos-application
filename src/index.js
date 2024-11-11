@@ -359,16 +359,16 @@ function addTodoConfirmed(event) {
     const categoryID = event.detail.categoryID;
     console.log(categoryID);
 
-    addTodo(idsGeneratorModule.generateTodoID(), categoryID, displayedTodoList.id, displayedProject.id, todoTitle, todoDesc, todoDueDate, todoPriority);
+    addTodo(idsGeneratorModule.generateTodoID(), categoryID, displayedTodoList.id, displayedProject.id, todoTitle, todoDesc, todoDueDate, todoPriority, false);
 }
 
-function addTodo(id, categoryID, todoListID, projectID, title, description, dueDate, priority) {
+function addTodo(id, categoryID, todoListID, projectID, title, description, dueDate, priority, isDone) {
     const project = getProject(projectID);
     const todoList = project.getTodoList(todoListID);
     const category = todoList.getCategory(categoryID);
 
-    const todo = category.addNewTodo(id, title, description, dueDate, priority);
-    domGeneratorModule.createTodoElement(id, categoryID, title, description, dueDate, priority);
+    const todo = category.addNewTodo(id, title, description, dueDate, priority, isDone);
+    domGeneratorModule.createTodoElement(id, categoryID, title, description, dueDate, priority, isDone);
 
     storageManagerModule.storeTodo(todo);
 }
@@ -438,11 +438,26 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
+document.addEventListener("todoCheckClicked", todoCheckClicked);
+
+function todoCheckClicked(event) {
+    const todoID = event.detail.todoID;
+    const categoryID = event.detail.categoryID;
+    const category = displayedTodoList.getCategory(categoryID);
+    const todo = category.getTodo(todoID);
+    const todoElement = domGeneratorModule.getTodo(todoID);
+    const todoCheck = todoElement.querySelector(".todoCheck");
+    const isChecked = todoCheck.checked;
+    todo.setInfo(todo.title, todo.description, todo.dueDate, todo.priority, isChecked);
+    domGeneratorModule.changeTodoTitleStyle(todoID, isChecked);
+    storageManagerModule.storeTodo(todo);
+}
+
 function loadStoredTodos() {
     const savedTodos = storageManagerModule.getTodos();
 
     savedTodos.forEach(todo => {
-        addTodo(todo.id, todo.categoryID, todo.todoListID, todo.projectID, todo.title, todo.description, todo.dueDate, todo.priority);
+        addTodo(todo.id, todo.categoryID, todo.todoListID, todo.projectID, todo.title, todo.description, todo.dueDate, todo.priority, todo.isDone);
     });
 }
 

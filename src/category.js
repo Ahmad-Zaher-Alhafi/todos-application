@@ -1,4 +1,3 @@
-import * as priorityModule from "./priority";
 import * as storageManagerModule from "./storageManager";
 import * as todoModule from "./todo";
 
@@ -16,8 +15,8 @@ class Category {
         return Object.freeze([...this.#todos]);
     }
 
-    addNewTodo(id, title, description, dueDate, priority = priorityModule.Priority.Normal) {
-        const todo = new todoModule.Todo(id, this.id, this.todoListID, this.projectID, title, description, dueDate, priority);
+    addNewTodo(id, title, description, dueDate, priority, isDone) {
+        const todo = new todoModule.Todo(id, this.id, this.todoListID, this.projectID, title, description, dueDate, priority, isDone);
         this.#todos.push(todo)
         return todo;
     }

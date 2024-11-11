@@ -128,17 +128,25 @@ function setCategoryTitle(id, title) {
     category.querySelector(".categoryTitle").textContent = title;
 }
 
-function setTodoInfo(id, title, description, dueDate, priority) {
+function setTodoInfo(id, title, description, dueDate, priority, isDone) {
     const todo = getTodo(id);
 
     const todoTitle = todo.querySelector(".todoTitle");
     todoTitle.textContent = title;
+
     const todoDesc = todo.querySelector(".todoDesc");
     todoDesc.textContent = description;
+
     const todoDueDate = todo.querySelector(".todoDueDate");
     todoDueDate.textContent = dueDate;
+
     const todoPriority = todo.querySelector(".todoPriority");
     todoPriority.textContent = priority;
+
+    const todoCheck = todo.querySelector(".todoCheck");
+    todoCheck.checked = isDone;
+
+    changeTodoTitleStyle(id, isDone)
 }
 
 function getProject(projectID) {
@@ -310,7 +318,7 @@ function showTodosInAllCategories(catrgories) {
 
 function showTodosInCategory(category) {
     category.getAllTodos().forEach(todo => {
-        createTodoElement(todo.id, category.id, todo.title, todo.description, todo.dueDate, todo.priority);
+        createTodoElement(todo.id, category.id, todo.title, todo.description, todo.dueDate, todo.priority, todo.isDone);
     });
 }
 
@@ -361,12 +369,12 @@ function getCategory(id) {
     return categoryElements.find(category => category.getAttribute("categoryID") === id.toString());
 }
 
-function createTodoElement(id, categoryID, title, description, dueDate, priority) {
+function createTodoElement(id, categoryID, title, description, dueDate, priority, isDone) {
     const todo = todoPrefab.cloneNode(true);
     todo.setAttribute("todoID", id);
     todoElements.push(todo);
 
-    setTodoInfo(id, title, description, dueDate, priority);
+    setTodoInfo(id, title, description, dueDate, priority, isDone);
 
     const categoryElement = getCategory(categoryID)
     const categoryTodos = categoryElement.querySelector(".categoryTodos");
@@ -374,6 +382,14 @@ function createTodoElement(id, categoryID, title, description, dueDate, priority
 
     const todoID = id;
     categoryID = categoryID;
+
+    const todoCheck = todo.querySelector(".todoCheck");
+    todoCheck.addEventListener("click", () => {
+        const event = new CustomEvent("todoCheckClicked", {
+            detail: { todoID, categoryID }
+        });
+        document.dispatchEvent(event);
+    });
 
     const editTodoButton = todo.querySelector(".editTodoButton");
     editTodoButton.addEventListener("click", () => {
@@ -392,6 +408,16 @@ function createTodoElement(id, categoryID, title, description, dueDate, priority
     });
 }
 
+function changeTodoTitleStyle(id, isChcked) {
+    const todo = getTodo(id);
+    const todoTitlElement = todo.querySelector(".todoTitle");
+    if (isChcked) {
+        todoTitlElement.style["text-decoration"] = "line-through";
+    } else {
+        todoTitlElement.style["text-decoration"] = "none";
+    }
+}
+
 function getTodo(id) {
     return todoElements.find(todo => todo.getAttribute("todoID") === id.toString());
 }
@@ -407,6 +433,6 @@ const editCategoryConfigurationElemnt = createTextConfigurationElement("Category
 
 export {
     createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, setTodoListTitle, displayTodoList, createCategoryElement, getCategory, createTodoElement,
-    getTodo, setCategoryTitle, removeCategoryElement, setTodoInfo, removeTodoElement, showTodoListAreaConfiguration, setTodoListDesc, showTodoListDescriptionArea,
+    getTodo, setCategoryTitle, removeCategoryElement, setTodoInfo, removeTodoElement, showTodoListAreaConfiguration, setTodoListDesc, showTodoListDescriptionArea, changeTodoTitleStyle,
     projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, editTodoListConfigurationElemnt, addCategoryConfigurationElemnt, todoListDisplay, todoConfigurationElemnt, editCategoryConfigurationElemnt,
 };
