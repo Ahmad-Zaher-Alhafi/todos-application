@@ -124,6 +124,8 @@ function addTodoListConfirmed(event) {
     const projectID = event.detail.projectID;
     const todoListID = idsGeneratorModule.generateTodoListID();
     addTodoList(todoListID, projectID, todoListTitle, "Todo list description");
+    displayTodoList(todoListID, projectID)
+
 }
 
 function addTodoList(todoListID, projectID, todoListTitle, todoListDescription) {
