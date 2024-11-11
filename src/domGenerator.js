@@ -38,7 +38,7 @@ todoListDisplay.remove();
 
 const emptyContentMessage = document.querySelector(".emptyContentMessage");
 
-const todoCategories = todoListDisplay.querySelector(".todoCategories");
+const categoriesContent = todoListDisplay.querySelector(".categoriesContent");
 
 const displayArea = document.querySelector(".displayArea");
 
@@ -336,7 +336,7 @@ function createCategoryElement(id, title) {
     categoryElements.push(category);
     const categoryTitle = category.querySelector(".categoryTitle");
     categoryTitle.textContent = title;
-    todoCategories.appendChild(category);
+    categoriesContent.appendChild(category);
 
     const categoryID = id;
 
