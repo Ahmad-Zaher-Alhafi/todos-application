@@ -204,7 +204,7 @@ body {
     font-size: 20px;
 }
 
-.todoListTitle{
+.todoListTitle {
     font-weight: bold;
 }
 
@@ -213,12 +213,6 @@ body {
     flex-direction: column;
     gap: 10px;
     align-items: center;
-    flex: 1;
-    height: 100%;
-    width: 97%;
-}
-
-.areaConfigurationInput {
     flex: 1;
     height: 100%;
     width: 97%;
@@ -394,7 +388,9 @@ button:not(.icon) {
     box-shadow: 2px 4px 2px rgb(41, 41, 41);
 }
 
-input {
+input,
+.areaConfigurationInput,
+.configurationDescInput {
     border-radius: 25px;
     padding: 5px 10px;
     outline: none;
@@ -410,19 +406,27 @@ input::placeholder {
     font-style: italic;
 }
 
-.projectSymbol{
+.projectSymbol {
     font-size: xx-large;
 }
 
-.todoSymbol{
+.todoSymbol {
     font-size: x-large;
 }
 
-.emptyContentMessage{
+.emptyContentMessage {
     font-size: 50px;
     position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+}
+
+.areaConfigurationInput,
+.configurationDescInput {
+    padding: 20px;
+    flex: 1;
+    height: 100%;
+    width: 97%;
 }
