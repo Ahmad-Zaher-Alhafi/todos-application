@@ -123,13 +123,13 @@ function addTodoListConfirmed(event) {
 
     const projectID = event.detail.projectID;
     const todoListID = idsGeneratorModule.generateTodoListID();
-    addTodoList(todoListID, projectID, todoListTitle, "Todo list discreption", format(new Date(1, 5, 2025), "dd-mm-yyyy"), priorityModule.Priority.High);
+    addTodoList(todoListID, projectID, todoListTitle, "Todo list discreption");
 }
 
-function addTodoList(todoListID, projectID, todoListTitle, todoListDesc, dueDate, priority) {
+function addTodoList(todoListID, projectID, todoListTitle, todoListDescription) {
     const project = getProject(projectID)
-    const todoList = project.addNewTodoList(todoListID, projectID, todoListTitle, todoListDesc, dueDate, priority);
-    domGeneratorModule.createTodoListElement(todoList.id, project.id, todoList.title);
+    const todoList = project.addNewTodoList(todoListID, projectID, todoListTitle, todoListDescription);
+    domGeneratorModule.createTodoListElement(todoList.id, project.id, todoList.title, todoList.description);
     storageManagerModule.storeTodoList(todoList);
 }
 
@@ -137,7 +137,7 @@ function loadStoredTodoLists() {
     const savedTodoLists = storageManagerModule.getTodoLists();
 
     savedTodoLists.forEach(todoList => {
-        addTodoList(todoList.id, todoList.projectID, todoList.title, todoList.description, todoList.dueDate, todoList.priority);
+        addTodoList(todoList.id, todoList.projectID, todoList.title, todoList.description);
     });
 }
 

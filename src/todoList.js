@@ -2,16 +2,13 @@ import * as categoryModule from "./category";
 import * as storageManagerModule from "./storageManager";
 
 class TodoList {
-    #categories;
+    #categories = [];
 
-    constructor(id, projectID, title, description, dueDate, priority, categories = []) {
+    constructor(id, projectID, title, description) {
         this.id = id;
         this.projectID = projectID;
         this.title = title;
         this.description = description;
-        this.dueDate = dueDate;
-        this.priority = priority;
-        this.#categories = categories;
     }
 
     get categories() {
