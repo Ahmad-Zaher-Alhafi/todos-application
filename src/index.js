@@ -28,7 +28,8 @@ function addProjectClicked() {
 
 function addProjectConfirmed(event) {
     const configurationTitleInput = event.target.parentElement.querySelector(".configurationTitleInput");
-    const projectTitle = configurationTitleInput.value;
+    let projectTitle = configurationTitleInput.value;
+    projectTitle = projectTitle === "" ? "Project" : projectTitle;
     addProject(idsGeneratorModule.generateProjectID(), projectTitle);
 }
 
@@ -119,7 +120,8 @@ document.addEventListener("addTodoListConfirmed", addTodoListConfirmed);
 
 function addTodoListConfirmed(event) {
     const configurationTitleInput = event.detail.target.parentElement.querySelector(".configurationTitleInput");
-    const todoListTitle = configurationTitleInput.value;
+    let todoListTitle = configurationTitleInput.value;
+    todoListTitle = todoListTitle === "" ? "Todo List" : todoListTitle;
 
     const projectID = event.detail.projectID;
     const todoListID = idsGeneratorModule.generateTodoListID();
@@ -245,7 +247,8 @@ function addCategoryClicked() {
 
 function addCategoryConfirmed(event) {
     const configurationTitleInput = event.target.parentElement.querySelector(".configurationTitleInput");
-    const categoryTitle = configurationTitleInput.value;
+    let categoryTitle = configurationTitleInput.value;
+    categoryTitle = categoryTitle === "" ? "Category" : categoryTitle;
 
     const projectID = displayedProject.id;
     const todoListID = displayedTodoList.id;
@@ -345,10 +348,12 @@ document.addEventListener("addTodoConfirmed", addTodoConfirmed);
 function addTodoConfirmed(event) {
 
     const configurationTitleInput = event.detail.target.parentElement.querySelector(".configurationTitleInput");
-    const todoTitle = configurationTitleInput.value;
+    let todoTitle = configurationTitleInput.value;
+    todoTitle = todoTitle === "" ? "Todo" : todoTitle;
 
     const configurationDescInput = event.detail.target.parentElement.querySelector(".configurationDescInput");
-    const todoDesc = configurationDescInput.value;
+    let todoDesc = configurationDescInput.value;
+    todoDesc = todoDesc === "" ? "Todo description" : todoDesc;
 
     const configurationDueDateInput = event.detail.target.parentElement.querySelector(".configurationDueDateInput");
     const todoDueDate = configurationDueDateInput.value;
@@ -357,7 +362,6 @@ function addTodoConfirmed(event) {
     const todoPriority = configurationPriorityDropDown.value;
 
     const categoryID = event.detail.categoryID;
-    console.log(categoryID);
 
     addTodo(idsGeneratorModule.generateTodoID(), categoryID, displayedTodoList.id, displayedProject.id, todoTitle, todoDesc, todoDueDate, todoPriority, false);
 }
