@@ -1,3 +1,5 @@
+import { compareAsc, format } from "date-fns";
+
 const projects = document.querySelector(".projects");
 
 const todoListPrefab = document.querySelector(".todoList");
@@ -51,7 +53,18 @@ function createTextConfigurationElement(labelText) {
 }
 
 function createTodoConfigurationElement() {
-    return todoConfigurationPrefab.cloneNode(true);
+    const todoConfiguration = todoConfigurationPrefab.cloneNode(true);
+    todoConfiguration.cloneNode(true);
+
+    // Set date input defulat value to today's date
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const day = String(today.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+
+    todoConfiguration.querySelector(".configurationDueDateInput").value = formattedDate;
+    return todoConfiguration;
 }
 
 function createProjectElement(id, title) {
