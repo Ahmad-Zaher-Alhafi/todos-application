@@ -332,12 +332,12 @@ function addTodoClicked(event) {
     let configurationConfirmButton = todoConfigurationElemnt.querySelector(".configurationConfirmButton");
     todoConfigurationElemnt.querySelector(".configurationButtons").replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
     configurationConfirmButton = todoConfigurationElemnt.querySelector(".configurationConfirmButton");
-    configurationConfirmButton.addEventListener("click", (event) => createTodoConfirmedEvent(event, categoryID));
+    configurationConfirmButton.addEventListener("click", () => createTodoConfirmedEvent(todoConfigurationElemnt, categoryID));
 }
 
-function createTodoConfirmedEvent(event, categoryID) {
+function createTodoConfirmedEvent(todoConfigurationElemnt, categoryID) {
     const customEvent = new CustomEvent("addTodoConfirmed", {
-        detail: { target: event.target, categoryID }
+        detail: { target: todoConfigurationElemnt, categoryID }
     });
 
     document.dispatchEvent(customEvent);
@@ -347,18 +347,18 @@ document.addEventListener("addTodoConfirmed", addTodoConfirmed);
 
 function addTodoConfirmed(event) {
 
-    const configurationTitleInput = event.detail.target.parentElement.querySelector(".configurationTitleInput");
+    const configurationTitleInput = event.detail.target.querySelector(".configurationTitleInput");
     let todoTitle = configurationTitleInput.value;
     todoTitle = todoTitle === "" ? "Todo" : todoTitle;
 
-    const configurationDescInput = event.detail.target.parentElement.querySelector(".configurationDescInput");
+    const configurationDescInput = event.detail.target.querySelector(".configurationDescInput");
     let todoDesc = configurationDescInput.value;
     todoDesc = todoDesc === "" ? "Todo description" : todoDesc;
 
-    const configurationDueDateInput = event.detail.target.parentElement.querySelector(".configurationDueDateInput");
+    const configurationDueDateInput = event.detail.target.querySelector(".configurationDueDateInput");
     const todoDueDate = configurationDueDateInput.value;
 
-    const configurationPriorityDropDown = event.detail.target.parentElement.querySelector(".configurationPriorityDropDown");
+    const configurationPriorityDropDown = event.detail.target.querySelector(".configurationPriorityDropDown");
     const todoPriority = configurationPriorityDropDown.value;
 
     const categoryID = event.detail.categoryID;
