@@ -270,6 +270,8 @@ body {
     border-bottom-style: solid;
     border-width: 2px;
     padding-bottom: 10px;
+
+    width: 97%;
 }
 
 .categoryTitle {
