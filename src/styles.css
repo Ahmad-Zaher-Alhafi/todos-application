@@ -371,7 +371,6 @@ body {
     background: none;
     border: none;
     color: inherit;
-    cursor: pointer;
 }
 
 button:not(.icon) {
@@ -387,6 +386,10 @@ button:not(.icon) {
     font-weight: bold;
 
     box-shadow: 2px 4px 2px rgb(41, 41, 41);
+}
+
+button {
+    cursor: pointer;
 }
 
 input,
@@ -432,7 +435,7 @@ input::placeholder {
     width: 97.7%;
 }
 
-.configurationButtons{
+.configurationButtons {
     display: flex;
     gap: 10px;
 }
