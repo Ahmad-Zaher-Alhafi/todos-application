@@ -414,7 +414,7 @@ function editTodoConfirmed(event) {
     const categoryID = event.detail.categoryID;;
     const category = displayedTodoList.getCategory(categoryID);
     const todo = category.getTodo(todoID);
-    todo.setTitle(todoTitle);
+    todo.setInfo(todoTitle, todoDesc, todoDueDate, todoPriority);
     domGeneratorModule.setTodoInfo(todoID, todoTitle, todoDesc, todoDueDate, todoPriority);
     storageManagerModule.storeTodo(todo);
 }
