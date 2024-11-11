@@ -235,6 +235,8 @@ function displayTodoList(todoListID, projectID) {
 
     storageManagerModule.storeLastDisplayedProjectIndex(projectID);
     storageManagerModule.storeLastDisplayedTodoListIndex(todoListID);
+
+    domGeneratorModule.showDisplayedTodoListBorderInSideBar(todoListID);
 }
 
 document.addEventListener("addCategoryClicked", addCategoryClicked);

@@ -430,6 +430,17 @@ function getTodo(id) {
     return todoElements.find(todo => todo.getAttribute("todoID") === id.toString());
 }
 
+function showDisplayedTodoListBorderInSideBar(todoListID) {
+    const displayedtodoList = getTodoList(todoListID);
+    todoListElements.forEach(todoList => {
+        if (todoList === displayedtodoList) {
+            todoList.setAttribute("displayedTodoListInSideBar", "true");
+        } else {
+            todoList.setAttribute("displayedTodoListInSideBar", "false");
+        }
+    });
+}
+
 const projectConfigurationElemnt = createTextConfigurationElement("Project title:");
 const editProjectConfigurationElemnt = createTextConfigurationElement("Project new title:");
 const todoListConfigurationElemnt = createTextConfigurationElement("TodoList title:");
@@ -441,6 +452,6 @@ const editCategoryConfigurationElemnt = createTextConfigurationElement("Category
 
 export {
     createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, setTodoListTitle, displayTodoList, createCategoryElement, getCategory, createTodoElement,
-    getTodo, setCategoryTitle, removeCategoryElement, setTodoInfo, removeTodoElement, showTodoListAreaConfiguration, setTodoListDesc, showTodoListDescriptionArea, changeTodoTitleStyle,
+    getTodo, setCategoryTitle, removeCategoryElement, setTodoInfo, removeTodoElement, showTodoListAreaConfiguration, setTodoListDesc, showTodoListDescriptionArea, changeTodoTitleStyle, showDisplayedTodoListBorderInSideBar,
     projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, editTodoListConfigurationElemnt, addCategoryConfigurationElemnt, todoListDisplay, todoConfigurationElemnt, editCategoryConfigurationElemnt,
 };
