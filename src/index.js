@@ -123,7 +123,7 @@ function addTodoListConfirmed(event) {
 
     const projectID = event.detail.projectID;
     const todoListID = idsGeneratorModule.generateTodoListID();
-    addTodoList(todoListID, projectID, todoListTitle, "Todo list discreption");
+    addTodoList(todoListID, projectID, todoListTitle, "Todo list description");
 }
 
 function addTodoList(todoListID, projectID, todoListTitle, todoListDescription) {
