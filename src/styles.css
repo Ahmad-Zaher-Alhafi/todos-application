@@ -124,7 +124,9 @@ body {
     font-weight: bold;
 }
 
-.addTodoListButton {
+.addTodoListButton,
+.addCategoryButton,
+.addTodoButton {
     font-size: 25px;
 }
 
@@ -251,6 +253,8 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10px;
+
+    font-size: x-large;
 }
 
 .category {
@@ -292,7 +296,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     gap: 40px;
 
     width: 100%;
@@ -323,6 +327,8 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10px;
+
+    font-size: x-large;
 }
 
 .todo {
