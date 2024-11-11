@@ -258,6 +258,8 @@ body {
     flex-direction: column;
     align-self: flex-start;
     gap: 20px;
+
+    width: 100%;
 }
 
 .categoryHeader {
@@ -284,9 +286,32 @@ body {
 
 .addTodoSection {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: 40px;
+
+    width: 100%;
+}
+
+.todoConfiguration {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+
+    border-style: solid;
+    border-radius: 25px;
+    padding: 20px;
+
+    width: 95%;
+}
+
+.configurationDescInput {
+    flex: 1;
+    width: 98%;
+    min-height: 200px;
 }
 
 .addTodoHeader {

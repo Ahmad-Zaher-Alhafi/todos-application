@@ -53,8 +53,8 @@
                 </div>
 
                 <div class="textConfiguration projectConfiguration">
-                    <label class="projectTitle" for="projectTitle">Project title:</label>
-                    <input class="configurationTitleInput" type="text" id="projectTitle" placeholder="Title here...">
+                    <label class="configurationTitle" for="configurationTitle">Project title:</label>
+                    <input class="configurationTitleInput" type="text" id="configurationTitle" placeholder="Title here...">
                     <button class="configurationConfirmButton">Confirm</button>
                 </div>
             </div>
@@ -110,6 +110,26 @@
                                         <div>Add new todo</div>
                                         <button class="addTodoButton icon"><i
                                                 class="fa-sharp fa-regular fa-square-plus"></i></button>
+                                    </div>
+
+                                    <div class="textConfiguration todoConfiguration">
+                                        <label class="configurationTitle" for="configurationTitle">Todo title:</label>
+                                        <input class="configurationTitleInput" type="text" id="configurationTitle" placeholder="Title here...">
+
+                                        <label class="configurationDesc" for="configurationDesc">Todo description:</label>
+                                        <input class="configurationDescInput" type="text" id="configurationDesc" placeholder="Description here...">
+
+                                        <label class="configurationDueDate" for="configurationDueDate">Todo due date:</label>
+                                        <input class="configurationDueDateInput" type="date" id="configurationDueDate" placeholder="Title here...">
+
+                                        <label class="configurationPriority" for="configurationPriority">Todo priority:</label>
+                                        <select class="configurationPriorityDropDown" id="configurationPriority" name="configurationPriority">
+                                            <option value="low">Low</option>
+                                            <option value="normal">Normal</option>
+                                            <option value="high">High</option>
+                                        </select>
+                                        <br>
+                                        <button class="configurationConfirmButton">Confirm</button>
                                     </div>
                                 </div>
 

@@ -42,7 +42,7 @@ const todoElements = [];
 
 function createTextConfigurationElement(labelText) {
     const textConfiguration = textConfigurationPrefab.cloneNode(true);
-    const configurationLabel = textConfiguration.querySelector(".projectTitle");
+    const configurationLabel = textConfiguration.querySelector(".configurationTitle");
     configurationLabel.textContent = labelText;
     return textConfiguration;
 }
