@@ -66,7 +66,15 @@ function createTodoConfigurationElement() {
     const formattedDate = `${year}-${month}-${day}`;
 
     todoConfiguration.querySelector(".configurationDueDateInput").value = formattedDate;
+
+    const configurationCancleButton = todoConfiguration.querySelector(".configurationCancleButton");
+    configurationCancleButton.removeEventListener("click", hideTodoConfigurationElement);
+    configurationCancleButton.addEventListener("click", hideTodoConfigurationElement);
     return todoConfiguration;
+}
+
+function hideTodoConfigurationElement() {
+    todoConfigurationElemnt.remove();
 }
 
 function createProjectElement(id, title) {

@@ -330,7 +330,7 @@ function addTodoClicked(event) {
     addTodoSection.appendChild(todoConfigurationElemnt);
 
     let configurationConfirmButton = todoConfigurationElemnt.querySelector(".configurationConfirmButton");
-    todoConfigurationElemnt.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
+    todoConfigurationElemnt.querySelector(".configurationButtons").replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
     configurationConfirmButton = todoConfigurationElemnt.querySelector(".configurationConfirmButton");
     configurationConfirmButton.addEventListener("click", (event) => createTodoConfirmedEvent(event, categoryID));
 }
@@ -388,7 +388,7 @@ function editTodoClicked(event) {
     todo.appendChild(todoConfigurationElemnt);
 
     let configurationConfirmButton = todoConfigurationElemnt.querySelector(".configurationConfirmButton");
-    todoConfigurationElemnt.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
+    todoConfigurationElemnt.querySelector(".configurationButtons").replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
     configurationConfirmButton = todoConfigurationElemnt.querySelector(".configurationConfirmButton");
     configurationConfirmButton.addEventListener("click", (event) => createEditTodoConfirmedEvent(event, todoID, categoryID));
 }

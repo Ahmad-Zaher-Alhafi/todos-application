@@ -431,3 +431,8 @@ input::placeholder {
     height: 100%;
     width: 97.7%;
 }
+
+.configurationButtons{
+    display: flex;
+    gap: 10px;
+}
