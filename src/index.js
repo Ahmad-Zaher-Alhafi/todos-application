@@ -321,12 +321,12 @@ function addTodoClicked(event) {
     const category = domGeneratorModule.getCategory(categoryID, todoListID, projectID);
 
     const addTodoSection = category.querySelector(".addTodoSection");
-    const addTodoConfigurationElemnt = domGeneratorModule.addTodoConfigurationElemnt;
-    addTodoSection.appendChild(addTodoConfigurationElemnt);
+    const todoConfigurationElemnt = domGeneratorModule.todoConfigurationElemnt;
+    addTodoSection.appendChild(todoConfigurationElemnt);
 
-    let configurationConfirmButton = addTodoConfigurationElemnt.querySelector(".configurationConfirmButton");
-    addTodoConfigurationElemnt.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
-    configurationConfirmButton = addTodoConfigurationElemnt.querySelector(".configurationConfirmButton");
+    let configurationConfirmButton = todoConfigurationElemnt.querySelector(".configurationConfirmButton");
+    todoConfigurationElemnt.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
+    configurationConfirmButton = todoConfigurationElemnt.querySelector(".configurationConfirmButton");
     configurationConfirmButton.addEventListener("click", (event) => createTodoConfirmedEvent(event, categoryID));
 }
 
@@ -345,10 +345,19 @@ function addTodoConfirmed(event) {
     const configurationTitleInput = event.detail.target.parentElement.querySelector(".configurationTitleInput");
     const todoTitle = configurationTitleInput.value;
 
+    const configurationDescInput = event.detail.target.parentElement.querySelector(".configurationDescInput");
+    const todoDesc = configurationDescInput.value;
+
+    const configurationDueDateInput = event.detail.target.parentElement.querySelector(".configurationDueDateInput");
+    const todoDueDate = configurationDueDateInput.value;
+
+    const configurationPriorityDropDown = event.detail.target.parentElement.querySelector(".configurationPriorityDropDown");
+    const todoPriority = configurationPriorityDropDown.value;
+
     const categoryID = event.detail.categoryID;
     console.log(categoryID);
 
-    addTodo(idsGeneratorModule.generateTodoID(), categoryID, displayedTodoList.id, displayedProject.id, todoTitle, "Todo desc", format(new Date(2024, 9, 1), "yyyy-mm-dd"), priorityModule.Priority.High);
+    addTodo(idsGeneratorModule.generateTodoID(), categoryID, displayedTodoList.id, displayedProject.id, todoTitle, todoDesc, todoDueDate, todoPriority);
 }
 
 function addTodo(id, categoryID, todoListID, projectID, title, description, dueDate, priority) {
@@ -365,16 +374,16 @@ function addTodo(id, categoryID, todoListID, projectID, title, description, dueD
 document.addEventListener("editTodoClicked", editTodoClicked);
 
 function editTodoClicked(event) {
-    const editTodoConfigurationElemnt = domGeneratorModule.editTodoConfigurationElemnt;
-    editTodoConfigurationElemnt.remove();
+    const todoConfigurationElemnt = domGeneratorModule.todoConfigurationElemnt;
+    todoConfigurationElemnt.remove();
     const todoID = event.detail.todoID;
     const categoryID = event.detail.categoryID;
     const todo = domGeneratorModule.getTodo(todoID);
-    todo.querySelector(".todoHeader").appendChild(editTodoConfigurationElemnt);
+    todo.querySelector(".todoHeader").appendChild(todoConfigurationElemnt);
 
-    let configurationConfirmButton = editTodoConfigurationElemnt.querySelector(".configurationConfirmButton");
-    editTodoConfigurationElemnt.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
-    configurationConfirmButton = editTodoConfigurationElemnt.querySelector(".configurationConfirmButton");
+    let configurationConfirmButton = todoConfigurationElemnt.querySelector(".configurationConfirmButton");
+    todoConfigurationElemnt.replaceChild(configurationConfirmButton.cloneNode(true), configurationConfirmButton);
+    configurationConfirmButton = todoConfigurationElemnt.querySelector(".configurationConfirmButton");
     configurationConfirmButton.addEventListener("click", (event) => createEditTodoConfirmedEvent(event, todoID, categoryID));
 }
 

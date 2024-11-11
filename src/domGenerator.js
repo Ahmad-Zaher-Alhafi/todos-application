@@ -9,6 +9,9 @@ projectPrefab.remove();
 const textConfigurationPrefab = document.querySelector(".projectConfiguration");
 textConfigurationPrefab.remove();
 
+const todoConfigurationPrefab = document.querySelector(".todoConfiguration");
+todoConfigurationPrefab.remove();
+
 const todoPrefab = document.querySelector(".todo");
 todoPrefab.remove();
 
@@ -45,6 +48,10 @@ function createTextConfigurationElement(labelText) {
     const configurationLabel = textConfiguration.querySelector(".configurationTitle");
     configurationLabel.textContent = labelText;
     return textConfiguration;
+}
+
+function createTodoConfigurationElement() {
+    return todoConfigurationPrefab.cloneNode(true);
 }
 
 function createProjectElement(id, title) {
@@ -375,14 +382,12 @@ const editProjectConfigurationElemnt = createTextConfigurationElement("Project n
 const todoListConfigurationElemnt = createTextConfigurationElement("TodoList title:");
 const editTodoListConfigurationElemnt = createTextConfigurationElement("TodoList new title:");
 const addCategoryConfigurationElemnt = createTextConfigurationElement("Category title:");
-const addTodoConfigurationElemnt = createTextConfigurationElement("Todo title:");
+const todoConfigurationElemnt = createTodoConfigurationElement();
 const editCategoryConfigurationElemnt = createTextConfigurationElement("Category title:");
-const editTodoConfigurationElemnt = createTextConfigurationElement("Todo title:");
 
 
 export {
     createProjectElement, removeProjectElement, setProjectTitle, getProject, createTodoListElement, removeTodoListElement, getTodoList, setTodoListTitle, displayTodoList, createCategoryElement, getCategory, createTodoElement,
     getTodo, setCategoryTitle, removeCategoryElement, setTodoTitle, removeTodoElement, showTodoListAreaConfiguration, setTodoListDesc, showTodoListDescriptionArea,
-    projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, editTodoListConfigurationElemnt, addCategoryConfigurationElemnt, todoListDisplay, addTodoConfigurationElemnt, editCategoryConfigurationElemnt,
-    editTodoConfigurationElemnt,
+    projectConfigurationElemnt, editProjectConfigurationElemnt, todoListConfigurationElemnt, editTodoListConfigurationElemnt, addCategoryConfigurationElemnt, todoListDisplay, todoConfigurationElemnt, editCategoryConfigurationElemnt,
 };
