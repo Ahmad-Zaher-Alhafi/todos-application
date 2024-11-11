@@ -327,7 +327,6 @@ function hideAllTodos() {
 }
 
 function createCategoryElement(id, title) {
-    console.log(title);
     const category = categoryPrefab.cloneNode(true);
     category.setAttribute("categoryID", id);
     categoryElements.push(category);
